@@ -1,7 +1,7 @@
 % Opcje klasy 'iithesis' opisane sa w komentarzach w pliku klasy. Za ich pomoca
 % ustawia sie przede wszystkim jezyk i rodzaj (lic/inz/mgr) pracy, oraz czy na
 % drugiej stronie pracy ma byc skladany wzor oswiadczenia o autorskim wykonaniu.
-\documentclass[declaration,shortabstract]{iithesis}
+\documentclass[declaration,shortabstract, inz]{iithesis}
 
 \usepackage[utf8]{inputenc}
 
@@ -11,30 +11,32 @@
 % Pamietaj o madrym (zgodnym z logicznym rozbiorem zdania oraz estetyka) recznym
 % zlamaniu wierszy w temacie pracy, zwlaszcza tego w jezyku pracy. Uzyj do tego
 % polecenia \fmlinebreak.
-\polishtitle    {Wymagający połamania wierszy\fmlinebreak tytuł pracy w~języku polskim}
-\englishtitle   {English title}
+\polishtitle    {Implementacja systemu audiowizualnego z obsługą głosową i komunikacją z komputerem pokładowym samochodu}
+\englishtitle   {Implementing an audio-visual system with voice commands and communication with the engine control unit}
 \polishabstract {\ldots}
 \englishabstract{\ldots}
 % w pracach wielu autorow nazwiska mozna oddzielic poleceniem \and
-\author         {Maksymilian Debeściak}
+\author         {Michał Postawka}
 % w przypadku kilku promotorow, lub koniecznosci podania ich afiliacji, linie
 % w ponizszym poleceniu mozna zlamac poleceniem \fmlinebreak
-\advisor        {dr Jan Kowalski}
+\advisor        {dr Marek Materzok}
 %\date          {}                     % Data zlozenia pracy
 % Dane do oswiadczenia o autorskim wykonaniu
 %\transcriptnum {}                     % Numer indeksu
-%\advisorgen    {dr. Jana Kowalskiego} % Nazwisko promotora w dopelniaczu
+%\advisorgen    {dr Jana Kowalskiego} % Nazwisko promotora w dopelniaczu
 %%%%%
-
 %%%%% WLASNE DODATKOWE PAKIETY
 %
 %\usepackage{graphicx,listings,amsmath,amssymb,amsthm,amsfonts,tikz}
+\usepackage{graphicx}
+\usepackage{placeins}
+% \usepackage[utf8]{inputenc}
 %
 %%%%% WŁASNE DEFINICJE I POLECENIA
 %
 %\theoremstyle{definition} \newtheorem{definition}{Definition}[chapter]
 %\theoremstyle{remark} \newtheorem{remark}[definition]{Observation}
-%\theoremstyle{plain} \newtheorem{theorem}[definition]{Theorem}
+%\theoremstyle{plain} \newthe\textbf{}orem{theorem}[definition]{Theorem}
 %\theoremstyle{plain} \newtheorem{lemma}[definition]{Lemma}
 %\renewcommand \qedsymbol {\ensuremath{\square}}
 % ...
@@ -46,12 +48,119 @@
 
 \chapter{Wprowadzenie}
 
-\ldots
+Ciężko zacząć tę pracę inaczej niż od inspiracji. Naście lat temu w kioskach można było kupić gazetki z różnymi kolekcjami podzielonymi na części. Idea była prosta - zamiast sprzedawać gotowy produkt za dużą sumę, można go było kupować po kawałku za drobne pieniądze. Popularne było składanie plastikowego szkieletu człowieka, natomiast ja wciągnąłem się w kolekcje starych amerykańskich seriali, a konkretniej  ''Nieustraszonego'' (ang. Knight Rider). Przez okres około 2 lat regularnego chodzenia do kiosku zebrałem i obejrzałem wszystkie odcinki.
+No dobrze, ale co to ma do tej pracy? - można zapytać. Głównymi bohaterami są Michael Knight i jego samochód KITT. Właśnie ten pojazd stał się inspiracją całego projektu.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{images/kitt_interior.jpg}
+    \caption{Wnętrze KITTa}
+    \label{fig:kitt}
+\end{figure}
+
+Nie byłbym w stanie dokładnie opisać KITTa, jego specyfikacja zmieniała się przez lata, ale spróbuję uchwycić to jak najlepiej. Jest to samochód wyposażony w wiele sprawnych systemów i komputer integrujący je w całość. Komputer jest więc bardzo świadomy o aktualnym stanie pojazdu i otoczenia, jest zdolny do przejęcia kontroli nad pojazdem i jego komponentami. Dzięki temu na desce rozdzielczej znalazła się masa ciekawych wskaźników i przycisków funkcyjnych. Najciekawszą częścią jest jednak moduł głosowy. Z KITTem można rozmawiać za pomocą mowy ludzkiej, prowadzić dialog, uzyskiwać potrzebne informacje i zlecać polecenia. To ta niesamowita cecha nadała mu osobowość i sprawiła, że samochód w ogóle może być postacią filmową.
+
+Serial jest oczywiście fikcyjny, nikt nie dysponował taką technologią na początku lat 80-tych, ale wielu o tym marzyło. Nawet ja oglądając ten serial w okolicach 2010 roku nie sądziłem, żeby taki pojazd mógł istnieć na prawdę. Schowałem całą kolekcję w rogu mojego pokoju i powoli o niej zapomniałem.
+
+10 lat później wymieniałem panel na desce rozdzielczej swojego BMW e30. Samochód powstał w dokładnie tym samym roku co serial. W rękach trzymałem moduł zegarka, prawie sześcienny z płaskim frontem. Pomyślałem, że jest podobnej wielkości i ma podobny kształt do modułu głosowego KITTa. Właściwie to było by całkiem dobre miejsce na taki moduł. Zauważyłem, że już od dłuższego czasu istnieje szereg kompetentnych asystentów głosowych. Sam korzystam z urządzenia Google Home mini, o którym mogę powiedzieć, że zapewnia dość wysoki poziom konwersacji oraz usług. Podjąłem więc decyzję - stworzę swojego własnego asystenta, nadam swojemu samochodowi trochę osobowości i będę miał lepszą kontrolę nad stanem pojazdu.
+
+\chapter{Specyfikacja}
+\section{Samochód}
+Pojazdem przeznaczonym do projektu jest BMW 316 (kod wewnętrzny BMW e30) z roku 1986.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{images/bmw_e30_front.jpg}
+    \caption{BMW 316}
+    \label{fig:e30_front}
+\end{figure}
+
+Na rysunku \ref{fig:e30_interior} zaznaczone są ważniejsze elementy wnętrza do których będę później wracał. Cyfrą 1 oznaczyłem przedni panel, a cyfrą 2 fabryczny zegarek.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{images/bmw_e30_interior_marked.png}
+    \caption{Wnętrze BMW 316}
+    \label{fig:e30_interior}
+\end{figure}
+\FloatBarrier
+
+\section{Silnik}
+Nie jest to pierwszy przeprowadzony przeze mnie na tym aucie projekt. Znajdująca się pod maską jednostka nie pochodzi nawet z palety dostępnych dla tego modelu silników, tylko z nowszego BMW e36 z roku 1997, wyprzedzając całą resztę o dekadę. Fabryczną jednostką sterował mechaniczny aparat zapłonowy i gaźnik. Nowy silnik (kod M44B19) sterowany jest za pomocą komputera. Pozwala to na zbieranie danych i precyzyjne kontrolowanie pracy oraz komunikację z urządzeniem zewnętrznym (w tym przypadku naszym modułem). Otwiera to zupełnie nowe możliwości.
+
+\section{Komputer silnika}
+Do sterowania został wykorzystany Bosch DME 5.2. Nie jest to otwarta platforma więc wiadomo o nim tylko to co zostało wybadane, oficjalne dane nie są udostępnione. Najbardziej interesujący będzie dla nas interfejs komunikacyjny. 
+
+% \begin{itemize}
+%     \item Samochód - BMW 316 (kod wewnętrzny BMW - e30) z roku 1986.
+%     \item Silnik - 4 cylindrowa jednostka o pojemności skokowej 1.9l z nowszego modelu e36, 1997, kod M44B19.
+%     \item Komputer silnika (ang. ECU) - Bosch DME 5.2
+%     \item 
+% \end{itemize}
+
+% \chapter{Istniejące rozwiązania}
+
+\chapter{Użytkowanie}
+Zasilanie modułu poprowadzone zostało z obwodu akcesoryjnego samochodu. W większości pojazdów (w tym także) obwód ten zostaje zasilony w momencie przekręcenia kluczyka w stacyjce na pierwszą pozycję, i pozostaje zasilony przez wszystkie pozostałe, czasami zostaje odcięty na sam moment kręcenia rozrusznikiem, żeby zmniejszyć maksymalne obciążenie. Na tym samym obwodzie funkcjonuje fabryczne radio. Wystarczy więc wsiąść do pojazdu i przekręcić kluczyk. Po chwili oczekiwania (musi załadować się system operacyjny oraz uruchomić aplikacja) na ekranie modułu powinien pojawić się prosty analogowy zegar. Tak więc domyślną funkcją systemu jest udawanie, że jest fabrycznym zegarkiem i ukrywanie swoich dodatkowych możliwości.
+
+System korzysta z połączenia z internetem, komputerem i radiem. Jeżeli pierwsze zawiedzie, moduł ograniczy się do roli zegarka bez informowania użytkownika o problemach, zachowując dyskrecję. Jeżeli problem nastąpi między komputerem, system powinien wciąż reagować normalnie, aczkolwiek bez podawania informacji o stanie pojazdu. Na połączenie z komputerem nie mamy wpływu, natomiast warto wiedzieć, że komputer nie otrzymuje zasilania dopóki nie przekręcimy kluczyka na pozycję drugą (zapłon). Warto więc zrobić to od razu, ale wiąże się to z większym obciążeniem i szybszym rozładowywaniem akumulatora podczas postoju, dlatego warto znać różnice. Na połączenie z internetem mamy wpływ, o ile moduł może zostać wyposażony w modem GSM/3G/LTE, wiązało by się to z utrzymywaniem kolejnego konta i kolejnymi opłatami, dlatego zdecydowałem się na inne rozwiązanie. Wbudowany w serce układy moduł WiFi stara się połączyć ze skonfigurowanym wcześniej routerem, w tym wypadku hotspotem telefonu komórkowego, który zawsze mamy przy sobie. Należy więc mieć włączony hotspot w telefonie oraz ustanowione połączenie z internetem przez sieć telefonii komórkowej. Taka obsługa urządzenia powinna zapewnić dostępność wszystkich komponentów i pełen zakres funkcji. Na koniec pozostaje nam włączyć radio i ustawić wejście na AUX. Jeżeli robiliśmy to wcześniej to powinno się to wydarzyć automatycznie po pierwszym przekręceniu kluczyka.
+
+Po zapewnieniu powyższych warunków możemy skomunikować się z systemem (który dotychczas był dla nas tylko zegarkiem). Wpierw musimy zakomunikować, że chcielibyśmy rozpocząć konwersację. Możemy to zrobić albo za pomocą przycisku znajdującego się na desce w lewym górnym rogu panelu, albo używając słowa klucza, w tym przypadku ``Computer''. Po odebraniu takiego sygnału system zaczyna nasłuchiwać mowy. Można zadać mu w zasadzie dowolne polecenie bądź pytanie, zarówno w języku polskim jak i angielskim, chociaż domyślny będzie język angielski. Przykładowymi pytaniami mogą być:
+\begin{itemize}
+  \item Jaka jest dzisiaj pogoda?
+  \item Opowiedz mi żart
+  \item Ile lat miałby Abraham Lincoln, gdyby żył?
+\end{itemize}
+System nie jest wszechwiedzący ani wszechrozumny, może więc nie znać odpowiedzi bądź zwyczajnie nie rozumieć pytania. Może też źle usłyszeć i odpowiedzieć na inne pytanie, ale w większości przypadków reakcja asystenta jest na miejscu. Na czas odpowiedzi powinien zmienić się widok na ekranie komputera na przypominający moduł głosu z KITTa. Komputerowe usta powinny ruszać się wraz z wypowiadaną odpowiedzią.
+
+Dostępne są 3 osobne widoki, domyślny zegar, usta asystenta oraz ``dashboard'' czyli monitorowanie aktualnego stanu silnika. Żeby przełączyć się miedzy nimi należy wydać polecenie takie jak:
+\begin{itemize}
+  \item switch to dashboard
+  \item show clock
+  \item change view to voice view
+\end{itemize}
+Naturalne kombinacje powyższych komend też powinny zadziałać.
+
+\chapter{Konstrukcja}
+\section{Część fizyczna}
+W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardware) i montażu.
+\subsection{Użyte części}
+\begin{itemize}
+  \item Raspberry Pi - model 4B w wersji 2Gb pamięci RAM
+  \item Karta microSD - SanDisk Extreme 32gb zgodny z UHS-1
+  \item Kamera / mikrofon - Sony PlayStation Eye
+  \item Ekran IPS 3.5" - Waveshare 12824
+  \item Ładowarka samochodowa USB 3A
+  \item Interfejs diagnostyczny OBD2 kompatybilny z BMW OBD1
+\end{itemize}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[
+        width=12cm,
+        keepaspectratio
+    ]{images/raspberry_vertical.jpg}
+    % \caption{}
+    \label{fig:rpi}
+  \end{figure}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[
+        width=12cm,
+        keepaspectratio
+    ]{images/sandisk_microsd.jpg}
+    % \caption{}
+    \label{fig:microsd}
+  \end{figure}
+\subsection{Drukowanie 3D}
+\subsection{Wdrażanie}
+\section{Tworzenie modeli 3D}
+\section{Środowisko testowe} % może do części fizycznej?
+\section{Część programistyczna}
 
 %%%%% BIBLIOGRAFIA
 
 %\begin{thebibliography}{1}
-%\bibitem{example} \ldots
+%\bibitem{example} \ldots https://pl.pinterest.com/pin/283656476514503341/
 %\end{thebibliography}
 
 \end{document}

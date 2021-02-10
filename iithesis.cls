@@ -152,7 +152,7 @@
   \endlist}
 
 % Strona tytulowa oraz abstrakty nie resetuja numeracji stron
-\renewenvironment {titlepage} {
+\renewenvironment {titlepage} {                
   \if@twocolumn \@restonecoltrue \onecolumn
   \else \@restonecolfalse \newpage \fi
   \thispagestyle{empty}
