@@ -30,6 +30,7 @@
 %\usepackage{graphicx,listings,amsmath,amssymb,amsthm,amsfonts,tikz}
 \usepackage{graphicx}
 \usepackage{placeins}
+\usepackage{enumitem}
 % \usepackage[utf8]{inputenc}
 %
 %%%%% WŁASNE DEFINICJE I POLECENIA
@@ -124,36 +125,90 @@ Naturalne kombinacje powyższych komend też powinny zadziałać.
 \chapter{Konstrukcja}
 \section{Część fizyczna}
 W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardware) i montażu.
-\subsection{Użyte części}
-\begin{itemize}
-  \item Raspberry Pi - model 4B w wersji 2Gb pamięci RAM
-  \item Karta microSD - SanDisk Extreme 32gb zgodny z UHS-1
-  \item Kamera / mikrofon - Sony PlayStation Eye
-  \item Ekran IPS 3.5" - Waveshare 12824
-  \item Ładowarka samochodowa USB 3A
-  \item Interfejs diagnostyczny OBD2 kompatybilny z BMW OBD1
-\end{itemize}
-\begin{figure}[htp]
-    \centering
-    \includegraphics[
-        width=12cm,
-        keepaspectratio
-    ]{images/raspberry_vertical.jpg}
-    % \caption{}
-    \label{fig:rpi}
-  \end{figure}
-\begin{figure}[htp]
-    \centering
-    \includegraphics[
-        width=12cm,
-        keepaspectratio
-    ]{images/sandisk_microsd.jpg}
-    % \caption{}
-    \label{fig:microsd}
-  \end{figure}
+\subsection{Komponenty}
+\begin{description}[style=nextline]
+  \item[Raspberry Pi - model 4B w wersji 2Gb pamięci RAM]
+    Jest to jednopłytkowy komputer z procesorem typu ARM z niskim poborem prądu.
+    Można by wybrać wiele innych komputerów do tego projektu, ten zapewnia wystarczającą wydajność i rozszerzalność, jest wprost kompatybilny z ekranem i ma najsolidniejsze wsparcie ze wszystkich dostępnych na rynku produktów.
+  \item[Karta microSD - SanDisk Extreme 32gb zgodny z UHS-1]
+    Warto wybrać jak najlepszą kartę pamięci (ona pełni rolę pamięci stałej naszego urządzenia), ponieważ od jej szybkości zależy chociażby czas uruchomienia całego urządzenia (i różnice między wolnymi a szybkimi kartami bywają tutaj bardzo duże, nawet 10-krotne). Ważne jest też, żeby karta miała odpowiednią wytrzymałość, gdyż karty sd nie są przeznaczone do takiego użytku (ich prawidłowe miejsce jest w aparatach fotograficznych) i potrafią utracić dane pod wpływem wielokrotnych zapisów systemu operacyjnego, bądź nagłych utrat zasilania.
+  \item[Kamera / mikrofon - Sony PlayStation Eye]
+    To chyba mój ulubiony element, sprzedawana jako dodatek do Sony PlayStation 3 kamera z 4-rema mikrofonami. Z racji, że producenci konsol do gier nie zarabiają największych pieniędzy (często nawet tracą) na samych konsolach, ale na koncesji z każdej sprzedanej gry, ceny konsol i sprzętu towarzyszącego są jak najniższe, a jakość bardzo wysoka. Dobrze wpływa na cenę też masowość produkcji. Urządzenie to można więc kupić bardzo tanio, jest bardzo popularne i da się je bez problemu podłączyć do Raspberry Pi (istnieją dostępne sterowniki). Mikrofon jest zdecydowanie najlepszy w swojej klasie, porównywałem go z kilkoma innymi, w tym dedykowanymi do Raspberry Pi (od ReSpeaker) i dużo lepiej sobie radził z rozpoznawaniem mowy, w szczególności w zaszumionych środowiskach (takich jak wnętrze jadącego samochodu).
+  \item[Ekran IPS 3.5'' - Waveshare 12824]
+    Moją początkową ideą było stworzenie wyświetlacza przypominającego moduł głosu KITTa z diod LED (prototyp opisałem poniżej), ale zrezygnowałem z niego z powodu ograniczonych funkcji oraz trudności ładnego wykończenia, tak żeby całość dobrze komponowała się z wnętrzem auta i nie wyglądała amatorsko. Nie zamierzałem natomiast rezygnować z funkcji modułu głosu (w znaczeniu wizualnym), chciałem więc żeby ekran nie stwarzał wrażenia wyblakłego taniego TFT z początków istnienia LCD, tylko żeby potrafił wyglądać jak indywidualne LEDy. Musiał to być ekran wysokiej jakości wykonany w dobrej technologii. Idealnym wyborem byłby ekran OLED, ale nie znalazłem żadnego który nie byłby ani za mały względem wielkości otworu, ani za duży (całość nie może być znacząco większa niż oryginalny zegarek). Drugą najlepszą technologią płaskich ekranów jest LCD IPS, zapewniając żywe kolory i szerokie kąty widzenia, ekran 3.5 cala od Waveshare okazał się mieścić idealnie i pasował wprost na Raspberry Pi, tworząc zwartą całość.
+  \item[Ładowarka samochodowa USB 3A]
+    W porównaniu do poprzednich modeli Raspberry Pi 4 charakteryzuje się dość wysokim poborem prądu, większym niż można oczekiwać od standardowej ładowarki USB, a trzeba zasilić także ekran. Najtańsza ładowarka z funkcją QuickCharge 3 okazała się trafiona i spełniła oczekiwania mocy.
+  \item[Interfejs diagnostyczny OBD2 kompatybilny z BMW OBD1]
+    Interfejs dostępny w samochodzie (OBD1) jest częściowo kompatybilny z ustandaryzowanym później OBD2. Jest też dużo mniej popularny, występuje tylko w samochodach dostępnych przez pojedyncze lata produkowanych przez BMW, natomiast OBD2 jest używane w samochodach wszystkich marek od lat 2000 do dziś. Da się natomiast kupić interfejs wspierający BMW OBD1, potrzebna jest tylko przejściówka. Taki zestaw daje możliwość komunikacji, ale program diagnostyczny również musi wspierać BMW OBD1, co nie jest popularne.
+  \item[Stelaż montażowy modułu w miejsce zegarka]
+    Takiego elementu nie ma niestety dostępnego w sprzedaży. Fabryczny stelaż mocujący moduł zegarka do panelu deski rozdzielczej nie nadawałby się do naszego modułu o innych wymiarach. Mocowanie byłem zmuszony zaprojektować i stworzyć samemu. O projektowaniu więcej w sekcji~\ref{section:3d}.
+\end{description}
+
+
+
+
+
+
+
+
+% \begin{figure}[htp]
+%     \centering
+%     \includegraphics[
+%         width=12cm,
+%         keepaspectratio
+%     ]{images/raspberry_vertical.jpg}
+%     % \caption{}
+%     \label{fig:rpi}
+% \end{figure}
+% \begin{figure}[htp]
+%     \centering
+%     \includegraphics[
+%         width=12cm,
+%         keepaspectratio
+%     ]{images/sandisk_microsd.jpg}
+%     \label{fig:microsd}
+% \end{figure}
+% \begin{figure}[htp]
+%     \centering
+%     \includegraphics[
+%         width=12cm,
+%         keepaspectratio
+%     ]{images/pseye.png}
+%     \label{fig:pseye}
+% \end{figure}
+% \begin{figure}[htp]
+%     \centering
+%     \includegraphics[
+%         width=12cm,
+%         keepaspectratio
+%     ]{images/waveshare_lcd_35.jpg}
+%     \label{fig:screen}
+% \end{figure}
+% \begin{figure}[htp]
+%     \centering
+%     \includegraphics[
+%         width=12cm,
+%         keepaspectratio
+%     ]{images/charger.jpg}
+%     \label{fig:charger}
+% \end{figure}
+% \begin{figure}[htp]
+%     \centering
+%     \includegraphics[
+%         width=12cm,
+%         keepaspectratio
+%     ]{images/obd2_inpa.jpeg}
+%     \label{fig:obd}
+% \end{figure}
+  
+  
 \subsection{Drukowanie 3D}
+
+
+
 \subsection{Wdrażanie}
 \section{Tworzenie modeli 3D}
+\label{section:3d}
 \section{Środowisko testowe} % może do części fizycznej?
 \section{Część programistyczna}
 
