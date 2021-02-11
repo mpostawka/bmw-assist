@@ -1,0 +1,125 @@
+{
+    "manifest": {
+        "displayName": "Switch view",
+        "invocationName": "Switch view",
+        "category": "PRODUCTIVITY"
+    },
+    "actions": [
+        {
+            "name": "com.example.actions.SwitchView",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.example.intents.SwitchView",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "ViewType"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "switch view ($ViewType:name)",
+                        "switch view to ($ViewType:name)",
+                        "switch to ($ViewType:name)",
+                        "switch ($ViewType:name)",
+                        "change view ($ViewType:name)",
+                        "change ($ViewType:name)",
+                        "change view to ($ViewType:name)",
+                        "view ($ViewType:name)",
+                        "show ($ViewType:name)",
+                        "show ($ViewType:name) view",
+                        "switch view  ($ViewType:name)",
+                        "switch view to  ($ViewType:name)",
+                        "switch to  ($ViewType:name)",
+                        "switch  ($ViewType:name)",
+                        "change view  ($ViewType:name)",
+                        "change  ($ViewType:name)",
+                        "change view to  ($ViewType:name)",
+                        "view  ($ViewType:name)",
+                        "show  ($ViewType:name)",
+                        "show  ($ViewType:name) view"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": "Switching to $name"
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.example.commands.SwitchView",
+                                    "params": {
+                                        "name": "$name"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "types": [
+        {
+            "name": "$ViewType",
+            "entities": [
+                {
+                    "key": "DashboardView",
+                    "synonyms": [
+                        "dash",
+                        "dashboard",
+                        "dashboardview",
+                        "dashboard view",
+                        "dash view",
+                        "dashboard View",
+                        "dash View",
+                        "dashboard few",
+                        "dash few"
+                    ]
+                },
+                {
+                    "key": "ClockView",
+                    "synonyms": [
+                        "clock",
+                        "Clock",
+                        "clockview",
+                        "clock view",
+                        "clock few",
+                        "cloak",
+                        "cloak view",
+                        "clock View",
+                        "clock  view",
+                        "clock  View"
+                    ]
+                },
+                {
+                    "key": "VoiceView",
+                    "synonyms": [
+                        "voice",
+                        "Voice",
+                        "vice",
+                        "voiceview",
+                        "voice view",
+                        "voice View",
+                        "voice  view",
+                        "voice  View",
+                        "voice few",
+                        "vice view",
+                        "device View"
+                    ]
+                }
+            ]
+        }
+    ]
+}

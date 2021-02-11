@@ -31,6 +31,37 @@
 \usepackage{graphicx}
 \usepackage{placeins}
 \usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  formfeed=\newpage,
+  showstringspaces=false,
+}
+
 % \usepackage[utf8]{inputenc}
 %
 %%%%% WŁASNE DEFINICJE I POLECENIA
@@ -228,6 +259,36 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
     Nie zadziałało. Naiwnie myślałem, że mogę uruchomić komputer silnika bez silnika? Zacząłem przeglądać dokładne schematy, szukając istotnych różnic w mojej konstrukcji. Nie miałem żadnego pośredniego sposobu żeby sprawdzić co działa a co nie. Zacząłem mierzyć multimetrem różne punkty wewnątrz sterownika. Silnie zdawało mi się, że wszystko podłączyłem jak należy, i nie myliłem się! Okazało się że padnięty jest mój stary interfejs diagnostyczny. Niewygodny test na samochodzie potwierdził tezę. Kupiłem kolejny, tym razem droższy i od tak udało mi się nawiązać połączenie. Byłem w stanie zczytać kodu błędu jak i badać aktualny stan silnika. Właściwie jedyną poprawną informacją na temat bieżącego stanu było napięcie na akumulatorze, w końcu żaden czujnik nie był podpięty. Było to jednocześnie dokładnie to czego potrzebowałem by rozpocząć negocjacje za pomocą Raspberrego i spróbować przetłumaczyć jakoś ten język robotów. Wiedziałem, że począwszy od kabla USB aż pod komputer silnika wszystko działa jak należy, a ja mogę zająć się programem.
 
 \section{Część programistyczna}
+\subsection{Wstęp}
+    Praca ta jest przede wszystkim pracą integracyjną. Nie jest celem implementowanie od podstaw biblioteki do komunikacji szeregowej ani wymyślanie asystenta głosowego samemu. Gdyby podążać taką ścieżką byłaby to praca na lata a efekt nie mógłby się równać z efektem niezliczonej liczby roboczogodzin poświęconych przez pracowników Google nad produktem asystenta. Tak jak pisałem na wstępie, żeby system tego typu miał rację bytu, musi korzystać z jak najnowszych i najlepiej rozwiniętych technologii. W przeciwnym wypadku doświadczenie rozmowy z asystentem byłoby męczące (problemy takie jak powtarzanie polecenia po kilka razy) i użytkownik prawdopodobnie zrezygnowałby w całości z używania systemu. 
+    
+\subsection{Kluczowe biblioteki i usługi}
+\begin{description}[style=nextline]
+    \item[Google Assistant Service]
+        Żeby uzyskać prawo do korzystania z usług asystenta Google trzeba być wpierw posiadaczem konta Google. Najłatwiej jest więc kupić gotowe urządzenie z funkcją asystenta (np. inteligentny głośnik Google Home mini), zalogować się i korzystać. Nie pozostawia to niestety za wiele możliwości modyfikowania funkcjonalności i tworzenia na tej bazie dalszych integracji. Na potrzeby takich projektów jak ten Google wystawia API asystenta z którego korzysta nasz program. Jedynym warunkiem jest zakaz tworzenia produktów komercyjnych na tej bazie, API służy tylko eksperymentom i prywatnym projektom. Najprostszym sposobem na uruchomienie działającego przykładu jest przejście przez dość długi oficjalny \href{https://developers.google.com/assistant/sdk/guides/service/python}{\color{blue} samouczek}. Istnieje gotowy przykład \textit{pushtotalk} który po uruchomieniu nasłuchuj po wciśnięciu klawisza, przetwarza wiadomość i wypowiada odpowiedź. Google zachęca nawet, żeby dalsze prace i zmiany prowadzać bazując na tym przykładzie. Zapewnia on większość przykładowych oferowanych funkcjonalności i nie ma nic pięknego w tworzeniu podobnego kodu samemu. Jest to idealny punkt wyjścia i ja również korzystam z modyfikowanej wersji tego przykładu jako komponentu programu.
+    \item[pyserial]
+        Biblioteka obsługująca port szeregowy, czyli natywny interfejs podłączonego przez USB interfejsu diagnostycznego.
+    \item[tkinter]
+        Wbudowana w Python domyślna biblioteka do tworzenia interfejsów graficznych i programów okienkowych. Zazwyczaj służy do tworzenia prostych programów oferując szybki dostęp do tworzenia przycisków czy pól tekstowych. Ja głównie korzystam z prostych funkcji geometrycznych do rysowania zegarka bądź ``ust'' asystenta.
+\end{description}
+    
+
+\subsection{Moduły}
+\subsubsection{main.py}
+\lstinputlisting{src/main.py}
+\subsubsection{view\textunderscore manager.py}
+\lstinputlisting{src/view_manager.py}
+\subsubsection{observer.py}
+\lstinputlisting{src/observer.py}
+\subsubsection{computer.py}
+\lstinputlisting{src/computer.py}
+\subsubsection{connection.py}
+\lstinputlisting{src/connection.py}
+% \subsubsection{pushtotalk.py}
+% \lstinputlisting{src/pushtotalk.py}
+\subsubsection{actions.json}
+\lstinputlisting{src/actions.json}
+
 
 %%%%% BIBLIOGRAFIA
 
