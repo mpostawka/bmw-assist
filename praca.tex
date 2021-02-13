@@ -13,8 +13,8 @@
 % polecenia \fmlinebreak.
 \polishtitle    {Implementacja systemu audiowizualnego z obsługą głosową i komunikacją z komputerem pokładowym samochodu}
 \englishtitle   {Implementing an audio-visual system with voice commands and communication with the engine control unit}
-\polishabstract {Tematem pracy jest tworzenie modułu komunikacji głosowej zamontowanego na desce rozdzielczej samochodu. Jest to praca integracyjna. Moduł komunikuje się z komputerem silnika i jest w stanie wyświetlić na ekranie podstawowe dane takie jak temperatura płynu chłodniczego. Rozumie większość poleceń naturalnej mowy i odpowiada na pytania typu "jaka jest teraz pogoda?". Potrafi też zmieniać wyświetlane na ekranie widoki. Moduł w domyślnym trybie udaje że jest fabrycznym zegarkiem, który zastępuje. Praca opowiada o projektowaniu, prototypowaniu, budowaniu i oprogramowywaniu systemu.}
-\englishabstract{This paper is about creating a voice command module located on the car's dashboard. It's an integration. The module communicates with the engine control unit and provides basic real time information about it's state, like coolant temperature. It can understand most of the natural language commands, such as "what's the weather today?". It is also capable of changing the view on screen. This work describes the struggles of engineering, prototyping, building and programming of such a system.}
+\polishabstract {Tematem pracy jest tworzenie modułu komunikacji głosowej zamontowanego na desce rozdzielczej samochodu. Jest to praca integracyjna. Moduł komunikuje się z komputerem silnika i jest w stanie wyświetlić na ekranie podstawowe dane takie jak temperatura płynu chłodniczego. Rozumie większość poleceń naturalnej mowy i odpowiada na pytania typu ``jaka jest teraz pogoda?''. Potrafi też zmieniać wyświetlane na ekranie widoki. Moduł w domyślnym trybie udaje że jest fabrycznym zegarkiem, który zastępuje. Praca opowiada o projektowaniu, prototypowaniu, budowaniu i oprogramowywaniu systemu.}
+\englishabstract{This paper is about creating a voice command module located on the car's dashboard. It's an integration. The module communicates with the engine control unit and provides basic real time information about it's state, like coolant temperature. It can understand most of the natural language commands, such as ``what's the weather today?''. It is also capable of changing the view on screen. This work describes the struggles of engineering, prototyping, building and programming of such a system.}
 % w pracach wielu autorow nazwiska mozna oddzielic poleceniem \and
 \author         {Michał Postawka}
 % w przypadku kilku promotorow, lub koniecznosci podania ich afiliacji, linie
@@ -35,39 +35,38 @@
 \usepackage{minted}
 \usemintedstyle{vs}
 \usepackage{listings}
-% \usepackage{tkiz}
 \usepackage{forest}
 
-% \definecolor{mygreen}{rgb}{0,0.6,0}
-% \definecolor{mygray}{rgb}{0.5,0.5,0.5}
-% \definecolor{mymauve}{rgb}{0.58,0,0.82}
-% \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
-% \lstset{
-%   backgroundcolor=\color{backcolour},
-%   basicstyle=\ttfamily\footnotesize,
-%   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-%   breaklines=true,                 % sets automatic line breaking
-%   commentstyle=\color{mygreen},    % comment style
-%   deletekeywords={...},            % if you want to delete keywords from the given language
-%   escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-%   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-%   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-%   keywordstyle=\color{blue},       % keyword style
-%   language=Python,                 % the language of the code
-%   morekeywords={*,...},            % if you want to add more keywords to the set
-%   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-%   numbersep=5pt,                   % how far the line-numbers are from the code
-%   numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
-%   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-%   showstringspaces=false,          % underline spaces within strings only
-%   showtabs=false,                  % show tabs within strings adding particular underscores
-%   stringstyle=\color{mymauve},     % string literal style
-%   tabsize=2,	                   % sets default tabsize to 2 spaces
-%   formfeed=\newpage,
-%   showstringspaces=false,
-%   frame=single,
-% }
+\lstset{
+  backgroundcolor=\color{backcolour},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  formfeed=\newpage,
+  showstringspaces=false,
+  frame=single,
+}
 
 % \usepackage[utf8]{inputenc}
 %
@@ -87,7 +86,7 @@
 
 \chapter{Wprowadzenie}
 
-Ciężko zacząć tę pracę inaczej niż od inspiracji. Naście lat temu w kioskach można było kupić gazetki z różnymi kolekcjami podzielonymi na części. Idea była prosta - zamiast sprzedawać gotowy produkt za dużą sumę, można go było kupować po kawałku za drobne pieniądze. Popularne było składanie plastikowego szkieletu człowieka, natomiast ja wciągnąłem się w kolekcje starych amerykańskich seriali, a konkretniej  ''Nieustraszonego'' (ang. Knight Rider). Przez okres około 2 lat regularnego chodzenia do kiosku zebrałem i obejrzałem wszystkie odcinki.
+Ciężko zacząć tę pracę inaczej niż od inspiracji. Naście lat temu w kioskach można było kupić gazetki z różnymi kolekcjami podzielonymi na części. Idea była prosta - zamiast sprzedawać gotowy produkt za dużą sumę, można go było kupować po kawałku za drobne pieniądze. Popularne było składanie plastikowego szkieletu człowieka, natomiast ja wciągnąłem się w kolekcje starych amerykańskich seriali, a konkretniej  ``Nieustraszonego'' (ang. Knight Rider). Przez okres około 2 lat regularnego chodzenia do kiosku zebrałem i obejrzałem wszystkie odcinki.
 No dobrze, ale co to ma do tej pracy? - można zapytać. Głównymi bohaterami są Michael Knight i jego samochód KITT. Właśnie ten pojazd stał się inspiracją całego projektu.
 
 \begin{figure}[htp]
@@ -140,7 +139,7 @@ Do sterowania został wykorzystany Bosch DME 5.2. Nie jest to otwarta platforma 
 % \chapter{Istniejące rozwiązania}
 
 \chapter{Użytkowanie}
-Zasilanie modułu poprowadzone zostało z obwodu akcesoryjnego samochodu. W większości pojazdów (w tym także) obwód ten zostaje zasilony w momencie przekręcenia kluczyka w stacyjce na pierwszą pozycję, i pozostaje zasilony przez wszystkie pozostałe, czasami zostaje odcięty na sam moment kręcenia rozrusznikiem, żeby zmniejszyć maksymalne obciążenie. Na tym samym obwodzie funkcjonuje fabryczne radio. Wystarczy więc wsiąść do pojazdu i przekręcić kluczyk. Po chwili oczekiwania (musi załadować się system operacyjny oraz uruchomić aplikacja) na ekranie modułu powinien pojawić się prosty analogowy zegar. Tak więc domyślną funkcją systemu jest udawanie, że jest fabrycznym zegarkiem i ukrywanie swoich dodatkowych możliwości.
+Zasilanie modułu poprowadzone zostało z obwodu akcesoryjnego samochodu. W większości pojazdów (w tym także) obwód ten zostaje zasilony w momencie przekręcenia kluczyka w stacyjce na pierwszą pozycję i pozostaje zasilony przez wszystkie pozostałe. Czasami zostaje odcięty na sam moment kręcenia rozrusznikiem, żeby zmniejszyć maksymalne obciążenie. Na tym samym obwodzie funkcjonuje fabryczne radio. Wystarczy więc wsiąść do pojazdu i przekręcić kluczyk. Po chwili oczekiwania (musi załadować się system operacyjny oraz uruchomić aplikacja) na ekranie modułu powinien pojawić się prosty analogowy zegar. Tak więc domyślną funkcją systemu jest udawanie, że jest fabrycznym zegarkiem i ukrywanie swoich dodatkowych możliwości.
 
 \begin{figure}[htp]
     \centering
@@ -150,9 +149,9 @@ Zasilanie modułu poprowadzone zostało z obwodu akcesoryjnego samochodu. W wię
 \end{figure}
 % \FloatBarrier
 
-System korzysta z połączenia z internetem, komputerem silnika i radiem. Jeżeli pierwsze zawiedzie, moduł ograniczy się do roli zegarka bez informowania użytkownika o problemach, zachowując dyskrecję. Jeżeli problem nastąpi na połączeniu z komputerem silnika, system powinien wciąż reagować normalnie, aczkolwiek bez podawania informacji o stanie pojazdu. Na połączenie z komputerem nie mamy wpływu, natomiast warto wiedzieć, że komputer nie otrzymuje zasilania dopóki nie przekręcimy kluczyka na pozycję drugą (zapłon). Warto więc zrobić to od razu, ale wiąże się to z większym obciążeniem i szybszym rozładowywaniem akumulatora podczas postoju, dlatego warto znać różnice. Na połączenie z internetem mamy wpływ, o ile moduł może zostać wyposażony w modem GSM/3G/LTE, wiązało by się to z utrzymywaniem kolejnego konta i kolejnymi opłatami, dlatego zdecydowałem się na inne rozwiązanie. Wbudowany w serce układy moduł WiFi stara się połączyć ze skonfigurowanym wcześniej routerem, w tym wypadku hotspotem telefonu komórkowego, który zawsze mamy przy sobie. Należy więc mieć włączony hotspot w telefonie oraz ustanowione połączenie z internetem przez sieć telefonii komórkowej. Taka obsługa urządzenia powinna zapewnić dostępność wszystkich komponentów i pełen zakres funkcji. Na koniec pozostaje nam włączyć radio i ustawić wejście na AUX. Jeżeli robiliśmy to wcześniej to powinno się to wydarzyć automatycznie po pierwszym przekręceniu kluczyka.
+System korzysta z połączenia z internetem, komputerem silnika i radiem. Jeżeli pierwsze zawiedzie, moduł ograniczy się do roli zegarka bez informowania użytkownika o problemach, zachowując dyskrecję. Jeżeli problem nastąpi na połączeniu z komputerem silnika, system powinien wciąż reagować normalnie, aczkolwiek bez podawania informacji o stanie pojazdu. Na połączenie z komputerem nie mamy wpływu, natomiast warto wiedzieć, że komputer nie otrzymuje zasilania dopóki nie przekręcimy kluczyka na pozycję drugą (zapłon). Warto więc zrobić to od razu, ale wiąże się to z większym obciążeniem i szybszym rozładowywaniem akumulatora podczas postoju, dlatego warto znać różnice. Na połączenie z internetem mamy wpływ. O ile moduł może zostać wyposażony w modem GSM/3G/LTE, wiązało by się to z utrzymywaniem kolejnego konta i kolejnymi opłatami, dlatego zdecydowałem się na inne rozwiązanie. Wbudowany w serce układu moduł WiFi stara się połączyć ze skonfigurowanym wcześniej routerem, w tym wypadku hotspotem telefonu komórkowego, który zawsze mamy przy sobie. Należy więc mieć włączony hotspot w telefonie oraz ustanowione połączenie z internetem przez sieć telefonii komórkowej. Taka obsługa urządzenia powinna zapewnić dostępność wszystkich komponentów i pełen zakres funkcji. Na koniec pozostaje nam włączyć radio i ustawić wejście na AUX. Jeżeli robiliśmy to wcześniej to powinno się to wydarzyć automatycznie po pierwszym przekręceniu kluczyka.
 
-Po zapewnieniu powyższych warunków możemy skomunikować się z systemem (który dotychczas był dla nas tylko zegarkiem). Wpierw musimy zakomunikować, że chcielibyśmy rozpocząć konwersację. Możemy to zrobić albo za pomocą przycisku znajdującego się na desce w lewym górnym rogu panelu, albo używając słowa klucza, w tym przypadku ``Computer''. Po odebraniu takiego sygnału system zaczyna nasłuchiwać mowy. Można zadać mu w zasadzie dowolne polecenie bądź pytanie, zarówno w języku polskim jak i angielskim, chociaż domyślny będzie język angielski. Przykładowymi pytaniami mogą być:
+Po zapewnieniu powyższych warunków możemy skomunikować się z systemem (który dotychczas był dla nas tylko zegarkiem). Najpierw musimy zakomunikować, że chcielibyśmy rozpocząć konwersację. Możemy to zrobić za pomocą przycisku znajdującego się na desce w lewym górnym rogu panelu. Po odebraniu takiego sygnału system zaczyna nasłuchiwać mowy. Można zadać mu w zasadzie dowolne polecenie bądź pytanie, zarówno w języku polskim jak i angielskim, chociaż domyślny będzie język angielski. Przykładowymi pytaniami mogą być:
 \begin{itemize}
   \item Jaka jest dzisiaj pogoda?
   \item Opowiedz mi żart
@@ -194,7 +193,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
     \end{figure}
     \FloatBarrier
   \item[Karta microSD - SanDisk Extreme 32gb zgodny z UHS-1]
-    Warto wybrać jak najlepszą kartę pamięci (ona pełni rolę pamięci stałej naszego urządzenia), ponieważ od jej szybkości zależy chociażby czas uruchomienia całego urządzenia (i różnice między wolnymi a szybkimi kartami bywają tutaj bardzo duże, nawet 10-krotne). Ważne jest też, żeby karta miała odpowiednią wytrzymałość, gdyż karty SD nie są przeznaczone do takiego użytku (ich prawidłowe miejsce jest w aparatach fotograficznych) i potrafią utracić dane pod wpływem wielokrotnych zapisów systemu operacyjnego, bądź nagłych utrat zasilania.
+    Warto wybrać jak najlepszą kartę pamięci (ona pełni rolę pamięci stałej naszego urządzenia), ponieważ od jej szybkości zależy chociażby czas uruchomienia całego urządzenia (i różnice między wolnymi a szybkimi kartami bywają tutaj bardzo duże, nawet 10-krotne). Ważne jest też, żeby karta miała odpowiednią wytrzymałość, gdyż karty SD nie są przeznaczone do takiego użytku (ich prawidłowe miejsce jest w aparatach fotograficznych) i potrafią utracić dane pod wpływem wielokrotnych zapisów systemu operacyjnego, bądź nagłych utrat zasilania. Nierozsądne więc byłoby kupienie najtańszej karty, bardziej podatnej za zużycie.
     \begin{figure}[htp]
         \centering
         \includegraphics[
@@ -304,11 +303,11 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
     
 \section{Tworzenie modeli 3D}
 \label{section:3d}
-    Stworzenie przestrzennego modelu mijającego się z wszystkimi przeszkodami nie było najprostsze. Powstało wiele wersji próbnych, natomiast zacząć należy od poprawnego zmierzenia wszystkich wymiarów. Suwmiarką cyfrową zmierzyłem wszystkie potrzebne wymiary i rozrysowałem rzuty 2D na kartce papieru. Do projektowania używałem oprogramowania SketchUp. Interfejs jest bardzo wygodny, wystarczy narysować płaski rzut obiektu w 2D, a następnie podzielić go i wynieść odpowiednie fragmenty na odpowiednią wysokość (dlatego warto mieć dobrze rozrysowane wymiary na kartce). Warto starannie upewnić się, że wszystkie ściany obiektu mają poprawną orientację, ponieważ obiekt musi być szczelny i zamknięty żeby dało się go poprawnie przerobić na ruch głowicy drukarki 3D. Skomplikowane obiekty i krzywe potrafią stwarzać problemy. Należy mieć na uwadze w jakiej orientacji będą tworzone kolejne warstwy\footnote{Podobnie jak kawałek drewna wydruk jest najwytrzymalszy wzdłuż warstwy, natomiast warstwy (bądź słoje) łatwiej się od siebie oddzielają.} i zadbać o odpowiednią wytrzymałość elementów i połączeń. Moje pomiary okazały się być na tyle dobre, że nie musiałem wprowadzać poprawek wymiarowych, natomiast miałem liczne problemy z wytrzymałością oraz z kolizjami (np. z portami urządzenia). Pod uwagę musiałem wziąć też chłodzenie. Dlatego w finalnym modelu ściany są dosyć grube i w ramach możliwości pogrubione, a przy zewnętrznych łapach widnieją wielkie bloki plastiku, co zapewnia większą powierzchnię klejenia warstw. Nie zmienia to faktu, że w gotowym modelu należało poprawić wiertarką otwory na śruby oraz wywiercić otwór na kabel audio. Drukarka do której miałem dostęp nie zapewniała ogromnej precyzji drobnych elementów, dlatego warto czasami zaprojektować coś solidnie i poprawić klasycznymi metodami obróbki.
+    Stworzenie przestrzennego modelu mijającego się z wszystkimi przeszkodami nie było najprostsze. Suwmiarką cyfrową zmierzyłem wszystkie potrzebne wymiary i rozrysowałem rzuty 2D na kartce papieru. Do projektowania używałem oprogramowania SketchUp. Interfejs jest bardzo wygodny, wystarczy narysować płaski rzut obiektu w 2D, a następnie podzielić go i wynieść odpowiednie fragmenty na odpowiednią wysokość (dlatego warto mieć dobrze rozrysowane wymiary na kartce). Warto starannie upewnić się, że wszystkie ściany obiektu mają poprawną orientację, ponieważ obiekt musi być szczelny i zamknięty żeby dało się go poprawnie przerobić na ruch głowicy drukarki 3D. Skomplikowane obiekty i krzywe potrafią stwarzać problemy. Należy mieć na uwadze w jakiej orientacji będą tworzone kolejne warstwy\footnote{Podobnie jak kawałek drewna wydruk jest najwytrzymalszy wzdłuż warstwy, natomiast warstwy (bądź słoje) łatwiej się od siebie oddzielają.} i zadbać o odpowiednią wytrzymałość elementów i połączeń. Moje pomiary okazały się być na tyle dobre, że nie musiałem wprowadzać poprawek wymiarowych, natomiast miałem liczne problemy z wytrzymałością oraz z kolizjami (np. z portami urządzenia). Pod uwagę musiałem wziąć też chłodzenie. Dlatego w finalnym modelu ściany są dosyć grube i w ramach możliwości pogrubione, a przy zewnętrznych łapach widnieją wielkie bloki plastiku, co zapewnia większą powierzchnię klejenia warstw. Nie zmienia to faktu, że w gotowym modelu należało poprawić wiertarką otwory na śruby oraz wywiercić otwór na kabel audio. Drukarka do której miałem dostęp nie zapewniała ogromnej precyzji drobnych elementów, dlatego warto czasami zaprojektować coś solidnie i poprawić klasycznymi metodami obróbki.
 
 
 \section{Środowisko testowe} % może do części fizycznej?
-    Ważną częścią projektu było nawiązanie połączenia z komputerem silnika. Tak jak pisałem na wstępie jest to ścieżka prawie nieprzebadana. Dotychczas gdy miałem problemy z odpalaniem bądź równą pracą silnika i chciałem sprawdzić informacje z komputera pokładowego musiałem znaleźć złącze diagnostyczne pod maską i poprowadzić kabel między komorą silnika a moim laptopem (narażając się na zarysowanie błotnika). To był z resztą najmniejszy problem, bo jedyny laptop na którym działał mi program diagnostyczny to kilkukilogramowy Fujitsu-Siemens z 2004 roku z systemem Windows XP. Nie udało mi się nigdy uruchomić programu w pełni na żadnym innym urządzeniu. A że laptop nie był szczególnie nowy, to baterii wystarczało na kilka minut, czyli akurat na włączenie systemu i odpalenie programu. Z przyczyn mi nieznanych nawiązanie połączenia wymagało często restartowania programu i ponownego podpinania kabli, aż do skutku. Musiałem więc działać pod zasilaczem, co było dodatkowo niewygodne, a wszystko to na dworze. Mimo wszystko bardzo mi się to przydawało, zdiagnozowałem w ten sposób wiele problemów takich jak spalony immobilizer, ułamane od wibracji kable wtyczki czujnika przepustnicy i silnika wolnych obrotów. W samochodzie który ma swoje lata i przekładany silnik takie informacje okazują się być bardzo przydatne.
+    Ważną częścią projektu było nawiązanie połączenia z komputerem silnika. Tak jak pisałem na wstępie jest to ścieżka prawie nieprzebadana. Dotychczas gdy miałem problemy z odpalaniem bądź równą pracą silnika i chciałem sprawdzić informacje z komputera pokładowego musiałem znaleźć złącze diagnostyczne pod maską i poprowadzić kabel między komorą silnika a moim laptopem (narażając się na zarysowanie błotnika). To był z resztą najmniejszy problem, bo jedyny laptop na którym działał mi program diagnostyczny to kilkukilogramowy Fujitsu-Siemens z 2004 roku z systemem Windows XP. Nie udało mi się nigdy uruchomić programu w pełni na żadnym innym urządzeniu. A że laptop nie był szczególnie nowy, to baterii wystarczało na kilka minut, czyli akurat na włączenie systemu i odpalenie programu. Z przyczyn mi nieznanych nawiązanie połączenia wymagało często restartowania programu i ponownego podpinania kabli, aż do skutku. Musiałem więc działać pod zasilaczem, co było dodatkowo niewygodne, a wszystko to pod gołym niebem. Mimo wszystko bardzo mi się to przydawało, zdiagnozowałem w ten sposób wiele problemów takich jak spalony immobilizer, czy ułamane od wibracji kable wtyczki czujnika przepustnicy i silnika wolnych obrotów. W samochodzie który ma swoje lata i przekładany silnik takie informacje okazują się być bardzo przydatne.
     
     \begin{figure}[htp]
         \centering
@@ -317,8 +316,8 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
     \end{figure}
     \FloatBarrier
     
-    Natomiast to, że byłem w stanie w niewygodny sposób połączyć się z silnikiem nie przybliżało mnie wprost do ustanowienia połączenia między nim a Raspberry Pi.
-    Chciałem mieć Pythonowy interfejs który będzie wysyłał zapytania do sterownika i interpretował odpowiedzi. Wiedziałem, że czeka mnie długa droga badania tego połączenia oraz interfejsu, potrzebowałem więc środowiska na którym mógłbym się uczyć. Jednym rozwiązaniem byłoby podłączenie Raspberrego do samochodu, zasilenie go, nawiązanie połączenia internetowego, wystartowanie serwera ssh i łączenie się z nim z komputera przy biurku w domu. Samochód powinien być w takich warunkach cały czas podłączony do ładowania, gdyż komputer i osprzęt silnika rozładują akumulator w kilka-kilkanaście godzin, no i trzeba jeszcze jakoś ustanowić połączenie internetowe. Ciężko byłoby też poruszać się tym pojazdem na co dzień, a wcale nie zamierzałem wyjmować go z użytku. Gdybym posiadał tylko jeden komputer silnika to pewnie byłbym na to skazany i zostawiłbym samochód pod domem rodzinnym. Na szczęście miałem dwa identyczne komputery. Postanowiłem więc zbudować środowisko testowe na biurku. Pozagniatałem kilkanaście kabli końcówkami pasującymi wprost do pinów złącza komputera i wyprowadziłem te kable ze złącza na płytkę prototypową (ang. breadboard). Całe złącze ma 88 pinów, musiałem więc wcześniej na podstawie znalezionych schematów odnaleźć piny zasilające oraz linie diagnostyczne. Rozebrałem przejściówkę OBD2 $\rightarrow$ OBD1 i dolutowując do otrzymanych kabli końcówki uniwersalne połączyłem ze sobą linię L, linię K oraz zasilanie. Do płytki przypiąłem zasilacz operujący w trybach 6V, 7.5V, 9V, 12V, ustawiłem i go na 12. Z drugiej strony do na wpół rozebranej przejściówki przypiąłem interfejs diagnostyczny. Po trzykrotnym sprawdzeniu czy w niczym się nie pomyliłem, zasilacz podłączyłem do prądu, a interfejs poprzez USB do starego laptopa Fujitsu-Siemens.
+    To, że byłem w stanie w niewygodny sposób połączyć się z silnikiem nie przybliżało mnie wprost do ustanowienia połączenia między nim a Raspberry Pi.
+    Chciałem mieć Pythonowy interfejs który będzie wysyłał zapytania do sterownika i interpretował odpowiedzi. Wiedziałem, że czeka mnie długa droga badania tego połączenia oraz interfejsu, potrzebowałem więc środowiska na którym mógłbym się uczyć. Jednym rozwiązaniem byłoby podłączenie Raspberrego do samochodu, zasilenie go, nawiązanie połączenia internetowego, wystartowanie serwera ssh i łączenie się z nim z komputera przy biurku w domu. Samochód powinien być w takich warunkach cały czas podłączony do ładowania, gdyż komputer i osprzęt silnika rozładują akumulator w kilka-kilkanaście godzin, no i trzeba jeszcze jakoś ustanowić połączenie internetowe. Ciężko byłoby też poruszać się tym pojazdem na co dzień, a wcale nie zamierzałem wyjmować go z użytku. Gdybym posiadał tylko jeden komputer silnika to pewnie byłbym na to skazany i zostawiłbym samochód pod domem rodzinnym. Na szczęście miałem dwa identyczne komputery. Postanowiłem więc zbudować środowisko testowe na biurku. Pozagniatałem kilkanaście kabli końcówkami pasującymi wprost do pinów złącza komputera i wyprowadziłem te kable ze złącza na płytkę prototypową (ang. breadboard). Całe złącze ma 88 pinów, musiałem więc wcześniej na podstawie znalezionych schematów odnaleźć piny zasilające oraz linie diagnostyczne. Rozebrałem przejściówkę OBD2 $\rightarrow$ OBD1 i dolutowując do otrzymanych kabli końcówki uniwersalne połączyłem ze sobą linię L, linię K oraz zasilanie. Do płytki przypiąłem zasilacz operujący w trybach 6V, 7.5V, 9V, 12V, ustawiłem i go na 12V. Z drugiej strony do na wpół rozebranej przejściówki przypiąłem interfejs diagnostyczny. Po trzykrotnym sprawdzeniu czy w niczym się nie pomyliłem, zasilacz podłączyłem do prądu, a interfejs poprzez USB do starego laptopa Fujitsu-Siemens.
     
     \begin{figure}[htp]
         \centering
@@ -327,18 +326,18 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
     \end{figure}
     \FloatBarrier
     
-    Nie zadziałało. Naiwnie myślałem, że mogę uruchomić komputer silnika bez silnika? Zacząłem przeglądać dokładne schematy, szukając istotnych różnic w mojej konstrukcji. Nie miałem żadnego pośredniego sposobu żeby sprawdzić co działa a co nie. Zacząłem mierzyć multimetrem różne punkty wewnątrz sterownika. Silnie zdawało mi się, że wszystko podłączyłem jak należy, i nie myliłem się! Okazało się że padnięty jest mój stary interfejs diagnostyczny. Niewygodny test na samochodzie potwierdził tezę. Kupiłem kolejny, tym razem droższy i od tak udało mi się nawiązać połączenie. Byłem w stanie zczytać kodu błędu jak i badać aktualny stan silnika. Właściwie jedyną poprawną informacją na temat bieżącego stanu było napięcie na akumulatorze, w końcu żaden czujnik nie był podpięty. Było to jednocześnie dokładnie to czego potrzebowałem by rozpocząć negocjacje za pomocą Raspberrego i spróbować przetłumaczyć jakoś ten język robotów. Wiedziałem, że począwszy od kabla USB aż pod komputer silnika wszystko działa jak należy, a ja mogę zająć się programem.
+    Nie zadziałało. Naiwnie myślałem, że mogę uruchomić komputer silnika bez silnika? Zacząłem przeglądać dokładne schematy, szukając istotnych różnic w mojej konstrukcji. Nie miałem żadnego pośredniego sposobu żeby sprawdzić co działa a co nie. Zacząłem mierzyć multimetrem różne punkty wewnątrz sterownika. Silnie zdawało mi się, że wszystko podłączyłem jak należy, i nie myliłem się! Okazało się że niesprawny jest mój stary interfejs diagnostyczny. Niewygodny test na samochodzie potwierdził tezę. Kupiłem kolejny, tym razem droższy i od tak udało mi się nawiązać połączenie. Byłem w stanie zczytać kodu błędu jak i badać aktualny stan silnika. Właściwie jedyną poprawną informacją na temat bieżącego stanu było napięcie na akumulatorze, w końcu żaden czujnik nie był podpięty. Było to jednocześnie dokładnie to czego potrzebowałem by rozpocząć negocjacje za pomocą Raspberrego i spróbować przetłumaczyć jakoś ten nieznany język. Wiedziałem, że począwszy od kabla USB aż pod komputer silnika wszystko działa jak należy, a ja mogę zająć się programem.
 
 \section{Część programistyczna}
-    Praca ta jest przede wszystkim pracą integracyjną. Nie jest celem implementowanie od podstaw biblioteki do komunikacji szeregowej ani wymyślanie asystenta głosowego samemu. Gdyby podążać taką ścieżką byłaby to praca na lata a efekt nie mógłby się równać z efektem niezliczonej liczby roboczogodzin poświęconych przez pracowników Google nad produktem asystenta. Tak jak pisałem na wstępie, żeby system tego typu miał rację bytu, musi korzystać z jak najnowszych i najlepiej rozwiniętych technologii. W przeciwnym wypadku doświadczenie rozmowy z asystentem byłoby męczące (problemy takie jak powtarzanie polecenia po kilka razy) i użytkownik prawdopodobnie zrezygnowałby w całości z używania systemu. 
+    Praca ta jest przede wszystkim pracą integracyjną. Nie jest celem implementowanie od podstaw biblioteki do komunikacji szeregowej ani wymyślanie asystenta głosowego samemu. Gdyby podążać taką ścieżką byłaby to praca na lata a efekt nie mógłby się równać z efektem niezliczonej liczby godzin pracy poświęconych przez pracowników Google nad produktem asystenta. Tak jak pisałem na wstępie, żeby system tego typu miał rację bytu, musi korzystać z jak najnowszych i najlepiej rozwiniętych technologii. W przeciwnym wypadku doświadczenie rozmowy z asystentem byłoby męczące (problemy takie jak powtarzanie polecenia po kilka razy) i użytkownik prawdopodobnie zrezygnowałby w całości z używania systemu. 
     
 \subsection{Kluczowe biblioteki i usługi}
 \begin{description}[style=nextline]
-    \item[Google Assistant Service]
-        Żeby uzyskać prawo do korzystania z usług asystenta Google trzeba być wpierw posiadaczem konta Google. Najłatwiej jest więc kupić gotowe urządzenie z funkcją asystenta (np. inteligentny głośnik Google Home mini), zalogować się i korzystać. Nie pozostawia to niestety za wiele możliwości modyfikowania funkcjonalności i tworzenia na tej bazie dalszych integracji. Na potrzeby takich projektów jak ten Google wystawia API asystenta z którego korzysta nasz program. Jedynym warunkiem jest zakaz tworzenia produktów komercyjnych na tej bazie, API służy tylko eksperymentom i prywatnym projektom. Najprostszym !sposobem na uruchomienie działającego przykładu jest przejście przez dość długi oficjalny \href{https://developers.google.com/assistant/sdk/guides/service/python}{\color{blue} samouczek}. Istnieje gotowy przykład \textit{pushtotalk} który po uruchomieniu nasłuchuj po wciśnięciu klawisza, przetwarza wiadomość i wypowiada odpowiedź. Google zachęca nawet, żeby dalsze prace i zmiany prowadzać bazując na tym przykładzie. Zapewnia on większość przykładowych oferowanych funkcjonalności i nie ma nic pięknego w tworzeniu podobnego kodu samemu. Jest to idealny punkt wyjścia i ja również korzystam z modyfikowanej wersji tego przykładu jako komponentu programu.
-    \item[pyserial]
+    \item[Google Assistant Service\cite{assistant}]
+        Żeby uzyskać prawo do korzystania z usług asystenta Google trzeba być najpierw posiadaczem konta Google. Najłatwiej jest więc kupić gotowe urządzenie z funkcją asystenta (np. inteligentny głośnik Google Home mini), zalogować się i korzystać. Nie pozostawia to niestety za wiele możliwości modyfikowania funkcjonalności i tworzenia na tej bazie dalszych integracji. Na potrzeby takich projektów jak ten Google wystawia API asystenta z którego korzysta nasz program. Jedynym warunkiem jest zakaz tworzenia produktów komercyjnych na tej bazie, API służy tylko eksperymentom i prywatnym projektom. Najprostszym sposobem na uruchomienie działającego przykładu jest przejście przez dość długi oficjalny samouczek\cite{samouczek}. Istnieje gotowy przykład \textit{pushtotalk} który nasłuchuje po wciśnięciu klawisza, przetwarza wiadomość i wypowiada odpowiedź. Google zachęca nawet, żeby dalsze prace i zmiany prowadzać bazując na tym przykładzie. Zapewnia on większość przykładowych oferowanych funkcjonalności. Jest to idealny punkt wyjścia i ja również korzystam z modyfikowanej wersji tego przykładu jako komponentu programu.
+    \item[pyserial\cite{pyserial}]
         Biblioteka obsługująca port szeregowy, czyli natywny interfejs podłączonego przez USB interfejsu diagnostycznego.
-    \item[tkinter]
+    \item[tkinter\cite{tkinter}]
         Wbudowana w Python domyślna biblioteka do tworzenia interfejsów graficznych i programów okienkowych. Zazwyczaj służy do tworzenia prostych programów oferując szybki dostęp do tworzenia przycisków czy pól tekstowych. Ja głównie korzystam z prostych funkcji geometrycznych do rysowania zegarka bądź ``ust'' asystenta.
 \end{description}
     
@@ -370,15 +369,15 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
 % \lstinputlisting{src/main.py}
     Punkt wejścia do naszego programu. Zdecydowałem się na architekturę wielowątkową. Deklaruję 4 główne funkcje:
     \begin{description}[style=nextline]
-        \item[omputer\textunderscore{}process]
-            Funkcja ta wpierw inicjalizuje połączenie z komputerem, a następnie w nieskończonej pętli co sekundę wysyła do komputera zapytanie o aktualny stan i próbuje zaktualizować tymi danymi widok (przyjmowany przez argument funkcji). Jeżeli zapytanie się nie powiedzie, błąd jest ignorowany i próba jest ponawiana w kolejnej iteracji czyli w kolejnej sekundzie.
+        \item[computer\textunderscore{}process]
+            Funkcja ta najpierw inicjalizuje połączenie z komputerem, a następnie w nieskończonej pętli co sekundę wysyła do komputera zapytanie o aktualny stan i próbuje zaktualizować tymi danymi widok (przyjmowany przez argument funkcji). Jeżeli zapytanie się nie powiedzie, błąd jest ignorowany i próba jest ponawiana w kolejnej iteracji czyli w kolejnej sekundzie.
         \item[assistant\textunderscore{}process]
             Jest tylko wrapperem na funkcję \mintinline{Python}{pushtotalk.main(...)}, której definicja i opis znajdują się niżej.
         \item[clock\textunderscore{}process]
             Ma dwie funkcje. Pierwsza co sekundę aktualizuje czas i informuje o tym widok zegarka (Który działa z dokładnością do minuty).
             Druga co ten sam odstęp czasu upewnia się, że jeżeli minęła już co najmniej sekunda od ostatniego aktualizowania widoku ``ust'' (Voice), to należy widok wyczyścić. Metoda \mintinline{Python}{setLoudness()} przyjmuje liczę od 0 do 100 oznaczającą chwilową intensywność dźwięku i na jej podstawie zapala proporcjonalną liczbę symulowanych diod widoku ``VoiceView''. 0 oznacza, że wszystkie będą zgaszone - stan domyślny.
         \item[main]
-            Tu rozpoczyna się wykonywanie programu. Wpierw inicjalizujemy obiekt \mintinline{Python}{ViewManager}, dziedziczący po klasie Tk zwanej często korzeniem. To ona definiuje wszystkie widoki i sposób wyświetlania oraz zarządza ich przełączaniem.
+            Tu rozpoczyna się wykonywanie programu. Najpierw inicjalizujemy obiekt \mintinline{Python}{ViewManager}, dziedziczący po klasie Tk zwanej często korzeniem. To ona definiuje wszystkie widoki i sposób wyświetlania oraz zarządza ich przełączaniem.
             Ustawiamy domyśly widok na Clock, a następnie inicjalizujemy i startujemy pozostałe wątki (ich ciała opisane są powyżej) w trybie daemon. Na sam koniec uruchamiamy nieskończoną pętlę mainloop klasy Tk która zadba o faktyczne aktualizowanie okien i grafiki.
     \end{description}
     
@@ -406,18 +405,18 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
 
 
 \subsubsection{clock.py / voice.py / dashboard.py}
-    Dziedziczące po klasie \mintinline{Python}{tkinter.Frame} indywidualne widoki. e
+    Dziedziczące po klasie \mintinline{Python}{tkinter.Frame} indywidualne widoki.
 
 
 \subsubsection{computer.py}
 % \lstinputlisting{src/computer.py}
-    W konstruktorze inicjalizuje \mintinline{Python}{Connection} pozwalając nam korzystać z abstrakcji na poziomie wysyłania zapytań ciągów bajtów. Metoda \mintinline{Python}{query} wysyła ciąg bajtów na adres \mintinline{Python}{0x12} - czyli adres komputera silnika. Metoda \mintinline{Python}{get_status} wysyła zapytanie \mintinline{Python}{0b03}, gdzie bajt \mintinline{Python}{0b} oznacza zapytanie o aktualny stan czujników, zaś \mintinline{Python}{03} jest grupą informacji która jest z naszej perspektywy najciekawsza.
-    Wynik jest następnie przetwarzany na ludzkie wartości. Wiedza na ten temat pochodzi z dekompilacji programów używanych przez BMW i analizie assemblera. W internecie można więc znaleźć wskazówki, ale nie odpowiedzi. Domyślanie się które bajty odpowiedzi oznaczają jakie wartości to proces żmudny, ale udało mi się namierzyć to co najważniejsze. Metoda zwraca słownik z danymi.
+    W konstruktorze inicjalizuje \mintinline{Python}{Connection} pozwalając nam korzystać z abstrakcji na poziomie wysyłania zapytań ciągów bajtów. Metoda \mintinline{Python}{query} wysyła ciąg bajtów na adres \mintinline{Python}{0x12} - czyli adres komputera silnika\cite{ds2_ecu}. Metoda \mintinline{Python}{get_status} wysyła zapytanie \mintinline{Python}{0b03}, gdzie bajt \mintinline{Python}{0b} oznacza zapytanie o aktualny stan czujników, zaś \mintinline{Python}{03} jest grupą informacji która jest z naszej perspektywy najciekawsza.
+    Wynik jest następnie przetwarzany na ludzkie wartości. Wiedza na ten temat pochodzi z dekompilacji programów używanych przez BMW i analizie assemblera. W internecie można więc znaleźć wskazówki, ale nie odpowiedzi. Domyślanie się które bajty odpowiedzi oznaczają jakie wartości to proces żmudny, ale udało mi się namierzyć to co najważniejsze. Metoda zwraca słownik z danymi. Warto wspomnieć o innych źródłach pomocnych w zrozumieniu tej komunikacji takich jak\cite{kline}\cite{eike}\cite{ds2pp}\cite{edblib}.
 
     
 \subsubsection{connection.py}
 % \lstinputlisting{src/connection.py}
-    \mintinline{Python}{Connection} nie zostało napisane przeze mnie - jest bazowane na podobnym uproszczonym projekcie \href{https://github.com/gigijoe/pBmwScanner}{\color{blue} pBmwScanner} umożliwiającym komunikację z innym podobnym sterownikiem silnika BMW. Jako, że \mintinline{Python}{Connection} realizuje najniższą warstwę abstrakcji między połączeniem a kodem Pythonowym, wprost nadawało się do mojego projektu i nie było sensu go przepisywać. Nawiązuje połączenie szeregowe na danym porcie i samo wylicza potrzebne sumy żeby zamknąć polecenie w poprawną ramkę \textit{DS2}.
+    \mintinline{Python}{Connection} nie zostało napisane przeze mnie - jest bazowane na podobnym uproszczonym projekcie pBmwScanner\cite{pBmwScanner} umożliwiającym komunikację z innym podobnym sterownikiem silnika BMW. Jako, że \mintinline{Python}{Connection} realizuje najniższą warstwę abstrakcji między połączeniem a kodem Pythonowym, wprost nadawało się do mojego projektu i nie było sensu go przepisywać. Nawiązuje połączenie szeregowe na danym porcie i samo wylicza potrzebne sumy żeby zamknąć polecenie w poprawną ramkę \textit{DS2}\cite{ds2}.
 
 
 \subsubsection{pushtotalk.py}
@@ -427,7 +426,7 @@ Ten plik ma prawie 400 lini, skupie się więc tylko na tych w których poczyni�
 \lstinputlisting[firstnumber=189, linerange={189-192}]{src/pushtotalk.py}
     Gdy zakończy się odpowiadanie, view manager jest o tym informowany by przywrócić poprzedni widok.
 \lstinputlisting[firstnumber=343, linerange={343-345}]{src/pushtotalk.py}
-    Jest to handler wywoływany gdy wykryta zostanie niestandardowa komenda z nim powiązana. W tym przykadku np. "show dash" wywoła funkcję \mintinline{Python}{switch} z argumentem \mintinline{Python}{"DashboardView"}. Niestandardowe komendy definiowane sa w pliku \mintinline{Python}{actions.json}.
+    Jest to handler wywoływany gdy wykryta zostanie niestandardowa komenda z nim powiązana. W tym przykadku np. ``show dash'' wywoła funkcję \mintinline{Python}{switch} z argumentem \mintinline{Python}{"DashboardView"}. Niestandardowe komendy definiowane sa w pliku \mintinline{Python}{actions.json}.
 
 
 
@@ -436,21 +435,44 @@ Ten plik ma prawie 400 lini, skupie się więc tylko na tych w których poczyni�
     Plik konfiguracyjny poleceń niestandardowych. W naszym wypadku poleceniem niestandardowym jest zmiana widoku na inny. W \mintinline{Python}{pushtotalk.py} zdefinowana została funkcja \mintinline{Python}{switch} z wrapperem oznaczonym \mintinline{Python}{"com.example.commands.SwitchView"}. Definiujemy więc \mintinline{Python}{"queryPatterns"} czyli jakiego typu hasła powinny wywoływać zmianę widoku, oraz która część tej wypowiedzi jest kluczowa i oznacza który konkretnie widok chcemy przywołać. W tym celu musimy też zdefiniować typ \mintinline{Python}{"ViewType"} gdzie definiujemy słowa klucze oraz ich typowe synonimy, a nawet potencjalne literówki. Dzięki temu użytkownik nie musi wypowiadać ``Change view to dashboard view'', wystarczy że powie ``show dash''. Całość jest dosyć naturalna.
     
 \subsection{Sposób uruchamiania}
+    Uruchamianie programu poza platformą na którą został napisany może być problematyczne.
+    Należałoby wykomentować z kodu uruchamianie wątku komunikującego się z komputerem silnika.
+    Rozpakowujemy archiwum do folderu \mintinline{Bash}{bmw-assist-project}. Zaczynamy od stworzenia wirtualnego środowiska venv. Następnie aktywujemy je i instalujemy wszystkie brakujący biblioteki.
+    \begin{minted}{Bash}
+        python3 -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+    \end{minted}
+    Program jest już w zasadzie funkcjonalny i powinien uruchomić się po wpisaniu \mintinline{Bash}{python main.py}, ale brakuje mu uwierzytelnień projektu Google z którego korzysta asystent. Żeby poradzić sobie z tym problemem należy przejść oficjalny poradnik\cite{samouczek}.
+    
+    Gdy udało nam się uruchomić \mintinline{Bash}{googlesamples-assistant-pushtotalk}, powinniśmy być w stanie uruchomić program. Nie będzie będziemy tylko w stanie skorzystać z poleceń niestandardowych takich jak zmiana widoku (zdefiniowanych w \mintinline{Bash}{actions.json}). Musimy zarejestrować te polecenia w naszym projekcie Google zgodnie z innym poradnikiem\cite{actions}.
 
 
 \chapter{Wnioski i dalsza praca}
     Praca nad tym projektem to była przede wszystkim świetna zabawa. Udało mi się spełnić moje wielkie marzenie. Uważam, że efekt jest na prawdę dobry i bardzo praktyczny. Jestem pozytywnie zaskoczony jak dobrze zadziałał mikrofon i zamiana słów na tekst. Jest to problem z którym nie radzi sobie wiele współczesnych producentów samochodów wyposażonych w funkcję obsługi głosowej. Przypuszczalnie muszą one bazować na modelach offline co na pewno utrudnia sprawę. Taki projekt na pewno uświadamia jak ogromna jest różnica między konceptem który wykazuje jakąś ciekawą funkcjonalność a projektem zamkniętym od A do Z. Cieszę się jednak, że się na to porwałem. Nie jestem w stu procentach zadowolony z użytego ekranu. Czasami myślę, że należało użyć pierwotnego prototypu LED. Nie zamykam się natomiast na tą możliwość i być może kiedyś przeprowadzę taką zmianę. Wymagałoby to zupełnie innego trybu wyświetlania informacji, ale zachowana byłaby wtedy tajemnica współczesnej technologii. Z pozoru wydawałoby się, że system faktycznie może pochodzić z lat 80-tych. Niestety taki ekran LCD jest wrażliwy na zmianę kąta patrzenia na powierzchnię, co szczególnie widać w ciemności gdy czarne tło rozjaśnia się i przyciemnia podczas ruszania głową. Nie zmienia to faktu że efekt jest wyśmienity i chwilę na pewno będę używał go w ten sposób.
     
-    Na przyszłość można usprawnić aplikację o dodatkowe informacje i widoki (co mam zamiar zrobić). Należałoby też dodać więcej niestandardowych komend głosowych takich jak ``przeczytaj na głos błędy silnika''. Ekran jest dobrym środkiem przekazu informacji, jednak fajnie byłoby rozszerzyć możliwości programu do maksimum - tak żeby osoba niezaznajomiona z projektem odniosła jak najlepsze wrażenie. Chciałbym też wprowadzić więcej stanu modyfikowalnego głosowo. Przykładem może być włączanie i wyłączanie możliwości rozpoczęcia konwersacji za pomocą słowa klucza bądź ustawianie jakiś alarmów (np. ``poinformuj mnie gdy silnik osiągnie 60 stopni''). Natomiast rozbudowywanie systemu w ten sposób to temat otwarty i bardzo szeroki. Spokojnie można poświęcić na to drugie tyle czasu co na całą konstrukcję. O ile myślę, że warto, to uważam że lepiej doimplementowywać kolejne funkcjonalności na bieżąco w trakcie pojawiania się nowych potrzeb. Może okazać się, że funkcjonalność typu ``poinformuj mnie gdy silnik osiągnie 60 stopni'' była tylko pozornie ciekawa i implementacja była tylko stratą czasu i niepotrzebną komplikacją.
+    Na przyszłość można usprawnić aplikację o dodatkowe informacje i widoki (co mam zamiar zrobić). Należałoby też dodać więcej niestandardowych komend głosowych takich jak ``przeczytaj na głos błędy silnika''. Ekran jest dobrym środkiem przekazu informacji, jednak kuszące byłoby rozszerzyć możliwości programu do maksimum - tak żeby osoba niezaznajomiona z projektem odniosła jak najlepsze wrażenie. Chciałbym też wprowadzić więcej stanu modyfikowalnego głosowo. Przykładem może być włączanie i wyłączanie możliwości rozpoczęcia konwersacji za pomocą słowa klucza bądź ustawianie jakiś alarmów (np. ``poinformuj mnie gdy silnik osiągnie 60 stopni''). Natomiast rozbudowywanie systemu w ten sposób to temat otwarty i bardzo szeroki. Spokojnie można poświęcić na to drugie tyle czasu co na całą konstrukcję. O ile myślę, że warto, to uważam że lepiej doimplementowywać kolejne funkcjonalności na bieżąco w trakcie pojawiania się nowych potrzeb. Może okazać się, że funkcjonalność typu ``poinformuj mnie gdy silnik osiągnie 60 stopni'' była tylko pozornie ciekawa i implementacja była tylko stratą czasu i niepotrzebną komplikacją.
     
     Innym rozwiązaniem jakie można rozważyć w przyszłości jest zapewnienie własnego połączenia z internetem oraz integracja z serwisami typu spotify. Można by podłączyć też moduł GPS dla prowadzenia prostej telemetrii i logowania pozycji. Na ekranie można by rysować różne ciekawe wykresy. Można by też logować w chmurze pozycję co stały odstęp czasu żeby zabezpieczyć się przed kradzieżą. Dobrze byłoby też nawiązywać połączenie z telefonem przez bluetooth. Funkcja której mi zawsze brakował podczas jazdy to uczestniczenie w pisanej rozmowie na czacie używając tylko głosu i odsłuchując wiadomości które normalnie byłbym zmuszony przeczytać. Pomysłów więc na dalszy rozwój tego konkretnego systemu mam całą masę, na pewno więcej niż mam czasu.
     
-    Innym kierunkiem w którym można się poruszać to implementacja systemu w innym samochodzie. Mogłoby to umożliwić dostęp do ciekawszych informacji takich jak aktualne spalanie. Nie jestem natomiast pozytywnie nastawiony do takiego pomysłu. Uważam że wielkim urokiem tego projektu jest całokształt i spójność stylistyczna. Tak jak KITT był tylko jeden, ten wolałbym, żeby taki samochód też istniał jeden. Nic nie stoi natomiast na przeszkodzie stworzenia kolejnej integracji.
+    Innym kierunkiem w którym można się poruszać to implementacja systemu w innym samochodzie. Mogłoby to umożliwić dostęp do ciekawszych informacji takich jak aktualne spalanie. Nie jestem natomiast pozytywnie nastawiony do takiego pomysłu. Uważam że wielkim urokiem tego projektu jest całokształt i spójność stylistyczna. Tak jak KITT był tylko jeden, wolałbym żeby taki samochód też istniał jeden. Nic nie stoi natomiast na przeszkodzie stworzenia kolejnej integracji.
 
 %%%%% BIBLIOGRAFIA
 
-\begin{thebibliography}{1}
-\bibitem{example} \ldots https://pl.pinterest.com/pin/283656476514503341/
+\begin{thebibliography}{2}
+\bibitem{assistant} https://assistant.google.com/
+\bibitem{samouczek} https://developers.google.com/assistant/sdk/guides/service/python
+\bibitem{pyserial} https://pythonhosted.org/pyserial/
+\bibitem{tkinter} https://docs.python.org/3/library/tkinter.html
+\bibitem{pBmwScanner} https://github.com/gigijoe/pBmwScanner
+\bibitem{ds2_ecu} http://markgardnergibson.com/BMW/addresses.html
+\bibitem{ds2} http://markgardnergibson.com/BMW/protocol.html
+\bibitem{actions} https://developers.google.com/assistant/sdk/guides/service/python/extend/custom-actions
+\bibitem{kline} http://m0agx.eu/2018/01/02/reading-obd2-data-without-elm327-part-2-k-line/
+\bibitem{openobd2} https://github.com/arturlangner/Open-OBD2-datalogger
+\bibitem{eike} https://github.com/gigijoe/E-IKE
+\bibitem{ds2pp} https://github.com/inferiorhumanorgans/DS2PlusPlus
+\bibitem{edblib} https://github.com/uholeschak/ediabaslib
 \end{thebibliography}
 
 

@@ -37,7 +37,7 @@
 % \advisor{dr Jan Kowalski \and
 %     prof. Janina Nowak \fmlinebreak
 %     Instytut Informatyki \fmlinebreak
-%     Uniwersytet Jagielloński \fmlinebreak
+%     Uniwersytet JagielloĹski \fmlinebreak
 %     (promotor pomocniczy)}
 %
 %%%%% PAKIETY WYMAGANE I DOLACZANE PRZEZ KLASE
@@ -152,7 +152,7 @@
   \endlist}
 
 % Strona tytulowa oraz abstrakty nie resetuja numeracji stron
-\renewenvironment {titlepage} {                
+\renewenvironment {titlepage} {
   \if@twocolumn \@restonecoltrue \onecolumn
   \else \@restonecolfalse \newpage \fi
   \thispagestyle{empty}
