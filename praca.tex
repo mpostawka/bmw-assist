@@ -13,8 +13,8 @@
 % polecenia \fmlinebreak.
 \polishtitle    {Implementacja systemu audiowizualnego z obsługą głosową i komunikacją z komputerem pokładowym samochodu}
 \englishtitle   {Implementing an audio-visual system with voice commands and communication with the engine control unit}
-\polishabstract {Tematem pracy jest tworzenie modułu komunikacji głosowej zamontowanego na desce rozdzielczej samochodu. Jest to praca integracyjna. Moduł komunikuje się z komputerem silnika i jest w stanie wyświetlić na ekranie podstawowe dane takie jak temperatura płynu chłodniczego. Rozumie większość poleceń naturalnej mowy i odpowiada na pytania typu ``jaka jest teraz pogoda?''. Potrafi też zmieniać wyświetlane na ekranie widoki. Moduł w domyślnym trybie udaje że jest fabrycznym zegarkiem, który zastępuje. Praca opowiada o projektowaniu, prototypowaniu, budowaniu i oprogramowywaniu systemu.}
-\englishabstract{This paper is about creating a voice command module located on the car's dashboard. It's an integration. The module communicates with the engine control unit and provides basic real time information about it's state, like coolant temperature. It can understand most of the natural language commands, such as ``what's the weather today?''. It is also capable of changing the view on screen. This work describes the struggles of engineering, prototyping, building and programming of such a system.}
+\polishabstract {Tematem pracy jest utworzenie modułu komunikacji głosowej zamontowanego na desce rozdzielczej samochodu. Jest to praca integracyjna. Moduł komunikuje się z komputerem silnika i jest w stanie wyświetlić na ekranie podstawowe dane takie jak temperatura płynu chłodniczego. Rozumie większość poleceń naturalnej mowy i odpowiada na pytania typu ,,jaka jest teraz pogoda?''. Potrafi też zmieniać wyświetlane na ekranie widoki. Moduł w domyślnym trybie udaje, że jest fabrycznym zegarkiem, który zastępuje. Praca opowiada o projektowaniu, prototypowaniu, budowaniu i oprogramowywaniu systemu.}
+\englishabstract{This paper is about creating a voice command module located on the car's dashboard. It's an integration project. The module communicates with the engine control unit and provides basic real time information about its state, like coolant temperature. It can understand most of the natural language commands, such as ,,what's the weather today?''. It is also capable of changing the view on the screen. This work describes the struggles of engineering, prototyping, building and programming of such a system.}
 % w pracach wielu autorow nazwiska mozna oddzielic poleceniem \and
 \author         {Michał Postawka}
 % w przypadku kilku promotorow, lub koniecznosci podania ich afiliacji, linie
@@ -86,8 +86,8 @@
 
 \chapter{Wprowadzenie}
 
-Ciężko zacząć tę pracę inaczej niż od inspiracji. Naście lat temu w kioskach można było kupić gazetki z różnymi kolekcjami podzielonymi na części. Idea była prosta - zamiast sprzedawać gotowy produkt za dużą sumę, można go było kupować po kawałku za drobne pieniądze. Popularne było składanie plastikowego szkieletu człowieka, natomiast ja wciągnąłem się w kolekcje starych amerykańskich seriali, a konkretniej  ``Nieustraszonego'' (ang. Knight Rider). Przez okres około 2 lat regularnego chodzenia do kiosku zebrałem i obejrzałem wszystkie odcinki.
-No dobrze, ale co to ma do tej pracy? - można zapytać. Głównymi bohaterami są Michael Knight i jego samochód KITT. Właśnie ten pojazd stał się inspiracją całego projektu.
+Ciężko zacząć tę pracę inaczej niż od inspiracji. Naście lat temu w kioskach można było kupić gazetki z różnymi kolekcjami podzielonymi na części. Idea była prosta -- zamiast sprzedawać gotowy produkt za dużą sumę, można go było kupować po kawałku za drobne pieniądze. Popularne było składanie plastikowego szkieletu człowieka, natomiast ja wciągnąłem się w kolekcje starych amerykańskich seriali, a konkretniej  ,,Nieustraszonego'' (ang. Knight Rider). Przez okres około 2 lat regularnego chodzenia do kiosku zebrałem i obejrzałem wszystkie odcinki.
+No dobrze, ale co to ma do tej pracy? -- można zapytać. Głównymi bohaterami są Michael Knight i jego samochód KITT. Właśnie ten pojazd stał się inspiracją całego projektu.
 
 \begin{figure}[htp]
     \centering
@@ -127,19 +127,19 @@ Na rysunku \ref{fig:e30_interior} zaznaczone są ważniejsze elementy wnętrza d
 Nie jest to pierwszy przeprowadzony przeze mnie na tym aucie projekt. Znajdująca się pod maską jednostka nie pochodzi nawet z palety dostępnych dla tego modelu silników, tylko z nowszego BMW e36 z roku 1997, wyprzedzając całą resztę o dekadę. Fabryczną jednostką sterował mechaniczny aparat zapłonowy i gaźnik. Nowy silnik (kod M44B19) sterowany jest za pomocą komputera. Pozwala to na zbieranie danych i precyzyjne kontrolowanie pracy oraz komunikację z urządzeniem zewnętrznym (w tym przypadku naszym modułem). Otwiera to zupełnie nowe możliwości.
 
 \section{Komputer silnika}
-Do sterowania został wykorzystany Bosch DME 5.2. Nie jest to otwarta platforma więc wiadomo o nim tylko to co zostało wybadane, oficjalne dane nie są udostępnione. Najbardziej interesujący będzie dla nas interfejs komunikacyjny. 
+Do sterowania został wykorzystany Bosch DME 5.2. Nie jest to otwarta platforma, więc wiadomo o nim tylko to, co zostało wybadane, oficjalne dane nie są udostępnione. Najbardziej interesujący będzie dla nas interfejs komunikacyjny. 
 
 % \begin{itemize}
-%     \item Samochód - BMW 316 (kod wewnętrzny BMW - e30) z roku 1986.
-%     \item Silnik - 4 cylindrowa jednostka o pojemności skokowej 1.9l z nowszego modelu e36, 1997, kod M44B19.
-%     \item Komputer silnika (ang. ECU) - Bosch DME 5.2
+%     \item Samochód -- BMW 316 (kod wewnętrzny BMW -- e30) z roku 1986.
+%     \item Silnik -- 4 cylindrowa jednostka o pojemności skokowej 1.9l z nowszego modelu e36, 1997, kod M44B19.
+%     \item Komputer silnika (ang. ECU) -- Bosch DME 5.2
 %     \item 
 % \end{itemize}
 
 % \chapter{Istniejące rozwiązania}
 
 \chapter{Użytkowanie}
-Zasilanie modułu poprowadzone zostało z obwodu akcesoryjnego samochodu. W większości pojazdów (w tym także) obwód ten zostaje zasilony w momencie przekręcenia kluczyka w stacyjce na pierwszą pozycję i pozostaje zasilony przez wszystkie pozostałe. Czasami zostaje odcięty na sam moment kręcenia rozrusznikiem, żeby zmniejszyć maksymalne obciążenie. Na tym samym obwodzie funkcjonuje fabryczne radio. Wystarczy więc wsiąść do pojazdu i przekręcić kluczyk. Po chwili oczekiwania (musi załadować się system operacyjny oraz uruchomić aplikacja) na ekranie modułu powinien pojawić się prosty analogowy zegar. Tak więc domyślną funkcją systemu jest udawanie, że jest fabrycznym zegarkiem i ukrywanie swoich dodatkowych możliwości.
+Zasilanie modułu poprowadzone zostało z obwodu akcesoryjnego samochodu. W większości pojazdów (także w tym) obwód ten zostaje zasilony w momencie przekręcenia kluczyka w stacyjce na pierwszą pozycję i pozostaje zasilony przez wszystkie pozostałe. Czasami zostaje odcięty na sam moment kręcenia rozrusznikiem, żeby zmniejszyć maksymalne obciążenie. Na tym samym obwodzie funkcjonuje fabryczne radio. Wystarczy więc wsiąść do pojazdu i przekręcić kluczyk. Po chwili oczekiwania (musi załadować się system operacyjny oraz uruchomić aplikacja) na ekranie modułu powinien pojawić się prosty analogowy zegar. Tak więc domyślną funkcją systemu jest udawanie, że jest fabrycznym zegarkiem i ukrywanie swoich dodatkowych możliwości.
 
 \begin{figure}[htp]
     \centering
@@ -159,7 +159,7 @@ Po zapewnieniu powyższych warunków możemy skomunikować się z systemem (któ
 \end{itemize}
 System nie jest wszechwiedzący ani wszechrozumny, może więc nie znać odpowiedzi bądź zwyczajnie nie rozumieć pytania. Może też źle usłyszeć i odpowiedzieć na inne pytanie, ale w większości przypadków reakcja asystenta jest na miejscu. Na czas odpowiedzi powinien zmienić się widok na ekranie komputera na przypominający moduł głosu z KITTa. Komputerowe usta powinny ruszać się wraz z wypowiadaną odpowiedzią.
 
-Dostępne są 3 osobne widoki, domyślny zegar, usta asystenta oraz ``dashboard'' czyli monitorowanie aktualnego stanu silnika. Żeby przełączyć się miedzy nimi należy wydać polecenie takie jak:
+Dostępne są 3 osobne widoki, domyślny zegar, usta asystenta oraz ,,dashboard'' czyli monitorowanie aktualnego stanu silnika. Żeby przełączyć się miedzy nimi należy wydać polecenie takie jak:
 \begin{itemize}
   \item switch to dashboard
   \item show clock
@@ -182,7 +182,7 @@ Naturalne kombinacje powyższych komend też powinny zadziałać.
 W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardware) i montażu.
 \subsection{Komponenty}
 \begin{description}[style=nextline]
-  \item[Raspberry Pi - model 4B w wersji 2Gb pamięci RAM]
+  \item[Raspberry Pi -- model 4B w wersji 2Gb pamięci RAM]
     Jest to jednopłytkowy komputer z procesorem typu ARM z niskim poborem prądu.
     Można by wybrać wiele innych komputerów do tego projektu, ten zapewnia wystarczającą wydajność i rozszerzalność, jest wprost kompatybilny z ekranem i ma najsolidniejsze wsparcie ze wszystkich dostępnych na rynku produktów.
     \begin{figure}[htp]
@@ -192,7 +192,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
       \label{fig:raspberry}
     \end{figure}
     \FloatBarrier
-  \item[Karta microSD - SanDisk Extreme 32gb zgodny z UHS-1]
+  \item[Karta microSD -- SanDisk Extreme 32gb zgodny z UHS-1]
     Warto wybrać jak najlepszą kartę pamięci (ona pełni rolę pamięci stałej naszego urządzenia), ponieważ od jej szybkości zależy chociażby czas uruchomienia całego urządzenia (i różnice między wolnymi a szybkimi kartami bywają tutaj bardzo duże, nawet 10-krotne). Ważne jest też, żeby karta miała odpowiednią wytrzymałość, gdyż karty SD nie są przeznaczone do takiego użytku (ich prawidłowe miejsce jest w aparatach fotograficznych) i potrafią utracić dane pod wpływem wielokrotnych zapisów systemu operacyjnego, bądź nagłych utrat zasilania. Nierozsądne więc byłoby kupienie najtańszej karty, bardziej podatnej za zużycie.
     \begin{figure}[htp]
         \centering
@@ -203,7 +203,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
         \label{fig:microsd}
     \end{figure}
     \FloatBarrier
-  \item[Kamera / mikrofon - Sony PlayStation Eye]
+  \item[Kamera / mikrofon -- Sony PlayStation Eye]
     To chyba mój ulubiony element, sprzedawana jako dodatek do Sony PlayStation 3 kamera z 4-rema mikrofonami. Z racji, że producenci konsol do gier nie zarabiają największych pieniędzy (często nawet tracą) na samych konsolach, ale na koncesji z każdej sprzedanej gry, ceny konsol i sprzętu towarzyszącego są jak najniższe, a jakość bardzo wysoka. Dobrze wpływa na cenę też masowość produkcji. Urządzenie to można więc kupić bardzo tanio, jest bardzo popularne i da się je bez problemu podłączyć do Raspberry Pi (istnieją dostępne sterowniki). Mikrofon jest zdecydowanie najlepszy w swojej klasie, porównywałem go z kilkoma innymi, w tym dedykowanymi do Raspberry Pi (od ReSpeaker) i dużo lepiej sobie radził z rozpoznawaniem mowy, w szczególności w zaszumionych środowiskach (takich jak wnętrze jadącego samochodu).
     \begin{figure}[htp]
         \centering
@@ -214,7 +214,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
         \label{fig:pseye}
     \end{figure}
     \FloatBarrier
-  \item[Ekran IPS 3.5'' - Waveshare 12824]
+  \item[Ekran IPS 3.5'' -- Waveshare 12824]
     Moją początkową ideą było stworzenie wyświetlacza przypominającego moduł głosu KITTa z diod LED (prototyp opisałem poniżej), ale zrezygnowałem z niego z powodu ograniczonych funkcji oraz trudności ładnego wykończenia, tak żeby całość dobrze komponowała się z wnętrzem auta i nie wyglądała amatorsko. Nie zamierzałem natomiast rezygnować z funkcji modułu głosu (w znaczeniu wizualnym), chciałem więc żeby ekran nie stwarzał wrażenia wyblakłego taniego TFT z początków istnienia LCD, tylko żeby potrafił wyglądać jak indywidualne LEDy. Musiał to być ekran wysokiej jakości wykonany w dobrej technologii. Idealnym wyborem byłby ekran OLED, ale nie znalazłem żadnego, który nie byłby ani za mały względem wielkości otworu, ani za duży (całość nie może być znacząco większa niż oryginalny zegarek). Drugą najlepszą technologią płaskich ekranów jest LCD IPS. Takie matryce zapewniają żywe kolory i szerokie kąty widzenia. Ekran IPS 3.5 cala od Waveshare okazał się mieścić idealnie i pasował wprost na Raspberry Pi, tworząc zwartą całość.
     \begin{figure}[htp]
         \centering
@@ -294,7 +294,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
 
 
 \subsection{Wdrażanie}
-    Przyszedł czas złożyć wszystko w całość. Ekran wprost spiął się z Raspberry w jeden obiekt. Następnie skręciłem moduł ze stelażem montażowym, a następnie całość przykręciłem do panelu deski rozdzielczej. Wtedy pojawił się pierwszy problem. Śruby mocujące stelaż miały dość wysoki łeb (około 3mm). Jedna z nich miała swoje miejsce tuż przed portem zasilania USB typ C. Nie był to nawet głupi błąd przy projektowaniu, nie dało się uniknąć tej kolizji przez inne umiejscowienie przestrzenne modułu, nie było na to miejsca. Po długich walkach i eksperymentowaniu z wieloma kablami i wtyczkami nie znalazłem dobrego rozwiązania. Zostałem zmuszony do wykręcenia tej śruby, tak że moduł trzyma się teraz na trzech i tylko opiera w czwartym miejscu\footnote{Z resztą komu się nigdy nie zdarzyło rozebrać coś i złożyć tak, że na stole wciąż pozostały niewkręcone nigdzie śrubki.}. Okazało się to być równie stabilne i wystarczająco mocne. Oryginalny panel z zegarka (maskownica) musiałem spłaszczyć przy pomocy szlifierki, tak aby ładnie przylegał do ekranu (wystawały z niego zaczepy, na które teraz nie było miejsca) i podkleiłem taśmą dwustronną. Następnie nakleiłem panel na ekran tak, żeby wyglądał jak fabryczny moduł.
+    Przyszedł czas złożyć wszystko w całość. Ekran wprost spiął się z Raspberry w jeden obiekt. Następnie skręciłem moduł ze stelażem montażowym, a następnie całość przykręciłem do panelu deski rozdzielczej. Wtedy pojawił się pierwszy problem. Śruby mocujące stelaż miały dość wysoki łeb (około 3mm). Jedna z nich miała swoje miejsce tuż przed portem zasilania USB typ C. Nie był to nawet głupi błąd przy projektowaniu, nie dało się uniknąć tej kolizji przez inne umiejscowienie przestrzenne modułu, nie było na to miejsca. Po długich walkach i eksperymentowaniu z wieloma kablami i wtyczkami nie znalazłem dobrego rozwiązania. Zostałem zmuszony do wykręcenia tej śruby, tak że moduł trzyma się teraz na trzech i tylko opiera w czwartym miejscu\footnote{Zresztą komu się nigdy nie zdarzyło rozebrać coś i złożyć tak, że na stole wciąż pozostały niewkręcone nigdzie śrubki.}. Okazało się to być równie stabilne i wystarczająco mocne. Oryginalny panel z zegarka (maskownica) musiałem spłaszczyć przy pomocy szlifierki, tak aby ładnie przylegał do ekranu (wystawały z niego zaczepy, na które teraz nie było miejsca) i podkleiłem taśmą dwustronną. Następnie nakleiłem panel na ekran tak, żeby wyglądał jak fabryczny moduł.
     
     Teraz należało znaleźć miejsce na mikrofon. Dla najlepszego efektu powinien znajdować się jak najbliżej ust kierowcy. Największą trudnością było znalezienie miejsca które mógłbym wykorzystać bez dużej ingerencji w budowę deski rozdzielczej. Wybrałem miejsce opisane cyfrą (1) na rysunku \ref{fig:e30_interior}. Najpierw rozebrałem kamerę do poziomu płytki z której wystawały 4 mikrofony. Z funkcji rejestracji obrazu nie zamierzałem korzystać, więc wszystko poza mikrofonami zakleiłem taśmą izolacyjną. Na mikrofony nałożyłem maskownicę która była elementem pośrednim między obudową PsEye a elementami mikrofonów. Następnie wywierciłem w panelu (tym oznaczonym cyfrą 1) 4 otwory o odstępach i wielkościach odpowiadających tej maskownicy. Należało jeszcze wykroić nożem trochę pianki z deski pod panelem, żeby zrobić miejsce dla płytki. Na szczęście wszystko się ładnie zmieściło i wygląda prawie fabrycznie po zmontowaniu. Poprowadzenie kabla pod deską do modułu nie było już problematyczne.
     
@@ -326,7 +326,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
     \end{figure}
     \FloatBarrier
     
-    Nie zadziałało. Naiwnie myślałem, że mogę uruchomić komputer silnika bez silnika? Zacząłem przeglądać dokładne schematy, szukając istotnych różnic w mojej konstrukcji. Nie miałem żadnego pośredniego sposobu żeby sprawdzić co działa a co nie. Zacząłem mierzyć multimetrem różne punkty wewnątrz sterownika. Silnie zdawało mi się, że wszystko podłączyłem jak należy, i nie myliłem się! Okazało się, że niesprawny jest mój stary interfejs diagnostyczny. Niewygodny test na samochodzie potwierdził tezę. Kupiłem kolejny, tym razem droższy i od tak udało mi się nawiązać połączenie. Byłem w stanie zczytać kodu błędu, jak i badać aktualny stan silnika. Właściwie jedyną poprawną informacją na temat bieżącego stanu było napięcie na akumulatorze, w końcu żaden czujnik nie był podpięty. Było to jednocześnie dokładnie to, czego potrzebowałem, by rozpocząć negocjacje za pomocą Raspberrego i spróbować przetłumaczyć jakoś ten nieznany język. Wiedziałem, że począwszy od kabla USB aż pod komputer silnika wszystko działa jak należy, a ja mogę zająć się programem.
+    Nie zadziałało. Naiwnie myślałem, że mogę uruchomić komputer silnika bez silnika? Zacząłem przeglądać dokładne schematy, szukając istotnych różnic w mojej konstrukcji. Nie miałem żadnego pośredniego sposobu żeby sprawdzić co działa a co nie. Zacząłem mierzyć multimetrem różne punkty wewnątrz sterownika. Silnie zdawało mi się, że wszystko podłączyłem jak należy, i nie myliłem się! Okazało się, że niesprawny jest mój stary interfejs diagnostyczny. Niewygodny test na samochodzie potwierdził tezę. Kupiłem kolejny, tym razem droższy i od tak udało mi się nawiązać połączenie. Byłem w stanie sczytać kodu błędu, jak i badać aktualny stan silnika. Właściwie jedyną poprawną informacją na temat bieżącego stanu było napięcie na akumulatorze, w końcu żaden czujnik nie był podpięty. Było to jednocześnie dokładnie to, czego potrzebowałem, by rozpocząć negocjacje za pomocą Raspberrego i spróbować przetłumaczyć jakoś ten nieznany język. Wiedziałem, że począwszy od kabla USB aż pod komputer silnika wszystko działa jak należy, a ja mogę zająć się programem.
 
 \section{Część programistyczna}
     Praca ta jest przede wszystkim pracą integracyjną. Nie jest celem implementowanie od podstaw biblioteki do komunikacji szeregowej ani wymyślanie asystenta głosowego samemu. Gdyby podążać taką ścieżką, byłaby to praca na lata, a efekt nie mógłby się równać z efektem niezliczonej liczby godzin pracy poświęconych przez pracowników Google nad produktem asystenta. Tak jak pisałem na wstępie, żeby system tego typu miał rację bytu, musi korzystać z jak najnowszych i najlepiej rozwiniętych technologii. W przeciwnym wypadku doświadczenie rozmowy z asystentem byłoby męczące (problemy takie jak powtarzanie polecenia po kilka razy) i użytkownik prawdopodobnie zrezygnowałby w całości z używania systemu. 
@@ -338,7 +338,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
     \item[pyserial\cite{pyserial}]
         Biblioteka obsługująca port szeregowy, czyli natywny interfejs podłączonego przez USB interfejsu diagnostycznego.
     \item[tkinter\cite{tkinter}]
-        Wbudowana w Python domyślna biblioteka do tworzenia interfejsów graficznych i programów okienkowych. Zazwyczaj służy do tworzenia prostych programów oferując szybki dostęp do tworzenia przycisków czy pól tekstowych. Ja głównie korzystam z prostych funkcji geometrycznych do rysowania zegarka bądź ``ust'' asystenta.
+        Wbudowana w Python domyślna biblioteka do tworzenia interfejsów graficznych i programów okienkowych. Zazwyczaj służy do tworzenia prostych programów oferując szybki dostęp do tworzenia przycisków czy pól tekstowych. Ja głównie korzystam z prostych funkcji geometrycznych do rysowania zegarka bądź ,,ust'' asystenta.
 \end{description}
     
     
@@ -375,7 +375,7 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
             Jest tylko wrapperem na funkcję \mintinline{Python}{pushtotalk.main(...)}, której definicja i opis znajdują się niżej.
         \item[clock\textunderscore{}process]
             Ma dwie funkcje. Pierwsza co sekundę aktualizuje czas i informuje o tym widok zegarka (Który działa z dokładnością do minuty).
-            Druga co ten sam odstęp czasu upewnia się, że jeżeli minęła już co najmniej sekunda od ostatniego aktualizowania widoku ``ust'' (Voice), to należy widok wyczyścić. Metoda \mintinline{Python}{setLoudness()} przyjmuje liczę od 0 do 100 oznaczającą chwilową intensywność dźwięku i na jej podstawie zapala proporcjonalną liczbę symulowanych diod widoku ``VoiceView''. 0 oznacza, że wszystkie będą zgaszone - stan domyślny.
+            Druga co ten sam odstęp czasu upewnia się, że jeżeli minęła już co najmniej sekunda od ostatniego aktualizowania widoku ,,ust'' (Voice), to należy widok wyczyścić. Metoda \mintinline{Python}{setLoudness()} przyjmuje liczę od 0 do 100 oznaczającą chwilową intensywność dźwięku i na jej podstawie zapala proporcjonalną liczbę symulowanych diod widoku ,,VoiceView''. 0 oznacza, że wszystkie będą zgaszone -- stan domyślny.
         \item[main]
             Tu rozpoczyna się wykonywanie programu. Najpierw inicjalizujemy obiekt \mintinline{Python}{ViewManager}, dziedziczący po klasie Tk zwanej często korzeniem. To ona definiuje wszystkie widoki i sposób wyświetlania oraz zarządza ich przełączaniem.
             Ustawiamy domyśly widok na Clock, a następnie inicjalizujemy i startujemy pozostałe wątki (ich ciała opisane są powyżej) w trybie daemon. Na sam koniec uruchamiamy nieskończoną pętlę mainloop klasy Tk która zadba o faktyczne aktualizowanie okien i grafiki.
@@ -390,9 +390,9 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
         \item[show\textunderscore{}frame] 
             Metoda przywołująca widok o danej nazwie na wierzch.
         \item[talk\textunderscore{}start]
-            Metoda przywołująca widok ``ust'' ustawiająca inne flagi, żeby zaznaczyć, że jest to stan tymczasowy.
+            Metoda przywołująca widok ,,ust'' ustawiająca inne flagi, żeby zaznaczyć, że jest to stan tymczasowy.
         \item[talk\textunderscore{}stop]
-            Metoda przywracająca widok ustawiony wcześniej przez \mintinline{Python}{show_frame}. Jest to sygnał do zakończenia tymczasowego widoku ``ust'', gdyż skończyło się mówienie.
+            Metoda przywracająca widok ustawiony wcześniej przez \mintinline{Python}{show_frame}. Jest to sygnał do zakończenia tymczasowego widoku ,,ust'', gdyż skończyło się mówienie.
         \item[queue\textunderscore{}audio]
             Wrapper na metodę obiektu klasy \mintinline{Python}{Observer}. Zleca asynchroniczną zmianę widoku dla nowego buforu dźwięku.
     \end{description}
@@ -410,29 +410,29 @@ W tej części znajduje się omówienie projektu od strony sprzętu (ang. hardwa
 
 \subsubsection{computer.py}
 % \lstinputlisting{src/computer.py}
-    W konstruktorze inicjalizuje \mintinline{Python}{Connection} pozwalając nam korzystać z abstrakcji na poziomie wysyłania zapytań ciągów bajtów. Metoda \mintinline{Python}{query} wysyła ciąg bajtów na adres \mintinline{Python}{0x12} - czyli adres komputera silnika\cite{ds2_ecu}. Metoda \mintinline{Python}{get_status} wysyła zapytanie \mintinline{Python}{0b03}, gdzie bajt \mintinline{Python}{0b} oznacza zapytanie o aktualny stan czujników, zaś \mintinline{Python}{03} jest grupą informacji która jest z naszej perspektywy najciekawsza.
+    W konstruktorze inicjalizuje \mintinline{Python}{Connection} pozwalając nam korzystać z abstrakcji na poziomie wysyłania zapytań ciągów bajtów. Metoda \mintinline{Python}{query} wysyła ciąg bajtów na adres \mintinline{Python}{0x12} -- czyli adres komputera silnika\cite{ds2_ecu}. Metoda \mintinline{Python}{get_status} wysyła zapytanie \mintinline{Python}{0b03}, gdzie bajt \mintinline{Python}{0b} oznacza zapytanie o aktualny stan czujników, zaś \mintinline{Python}{03} jest grupą informacji która jest z naszej perspektywy najciekawsza.
     Wynik jest następnie przetwarzany na ludzkie wartości. Wiedza na ten temat pochodzi z dekompilacji programów używanych przez BMW i analizie assemblera. W internecie można więc znaleźć wskazówki, ale nie odpowiedzi. Domyślanie się które bajty odpowiedzi oznaczają jakie wartości to proces żmudny, ale udało mi się namierzyć to co najważniejsze. Metoda zwraca słownik z danymi. Warto wspomnieć o innych źródłach pomocnych w zrozumieniu tej komunikacji takich jak\cite{kline}\cite{eike}\cite{ds2pp}\cite{edblib}.
 
     
 \subsubsection{connection.py}
 % \lstinputlisting{src/connection.py}
-    \mintinline{Python}{Connection} nie zostało napisane przeze mnie - jest bazowane na podobnym uproszczonym projekcie pBmwScanner\cite{pBmwScanner} umożliwiającym komunikację z innym podobnym sterownikiem silnika BMW. Jako, że \mintinline{Python}{Connection} realizuje najniższą warstwę abstrakcji między połączeniem a kodem Pythonowym, wprost nadawało się do mojego projektu i nie było sensu go przepisywać. Nawiązuje połączenie szeregowe na danym porcie i samo wylicza potrzebne sumy żeby zamknąć polecenie w poprawną ramkę \textit{DS2}\cite{ds2}.
+    \mintinline{Python}{Connection} nie zostało napisane przeze mnie -- jest bazowane na podobnym uproszczonym projekcie pBmwScanner\cite{pBmwScanner} umożliwiającym komunikację z innym podobnym sterownikiem silnika BMW. Jako, że \mintinline{Python}{Connection} realizuje najniższą warstwę abstrakcji między połączeniem a kodem Pythonowym, wprost nadawało się do mojego projektu i nie było sensu go przepisywać. Nawiązuje połączenie szeregowe na danym porcie i samo wylicza potrzebne sumy żeby zamknąć polecenie w poprawną ramkę \textit{DS2}\cite{ds2}.
 
 
 \subsubsection{pushtotalk.py}
 Ten plik ma prawie 400 lini, skupie się więc tylko na tych w których poczyniłem istotne zmiany.
 \lstinputlisting[firstnumber=155, linerange={155-162}]{src/pushtotalk.py}
-    Gdy asystent zaczyna odpowiadać, view manager jest informowany a bufor z danym fragmentem audio jest wrzucany na asynchroniczną kolejkę pod analizę i aktualizację widoku ``ust''.
+    Gdy asystent zaczyna odpowiadać, view manager jest informowany a bufor z danym fragmentem audio jest wrzucany na asynchroniczną kolejkę pod analizę i aktualizację widoku ,,ust''.
 \lstinputlisting[firstnumber=189, linerange={189-192}]{src/pushtotalk.py}
     Gdy zakończy się odpowiadanie, view manager jest o tym informowany by przywrócić poprzedni widok.
 \lstinputlisting[firstnumber=343, linerange={343-345}]{src/pushtotalk.py}
-    Jest to handler wywoływany gdy wykryta zostanie niestandardowa komenda z nim powiązana. W tym przykadku np. ``show dash'' wywoła funkcję \mintinline{Python}{switch} z argumentem \mintinline{Python}{"DashboardView"}. Niestandardowe komendy definiowane sa w pliku \mintinline{Python}{actions.json}.
+    Jest to handler wywoływany gdy wykryta zostanie niestandardowa komenda z nim powiązana. W tym przykadku np. ,,show dash'' wywoła funkcję \mintinline{Python}{switch} z argumentem \mintinline{Python}{"DashboardView"}. Niestandardowe komendy definiowane sa w pliku \mintinline{Python}{actions.json}.
 
 
 
 \subsubsection{actions.json}
 % \lstinputlisting{src/actions.json}
-    Plik konfiguracyjny poleceń niestandardowych. W naszym wypadku poleceniem niestandardowym jest zmiana widoku na inny. W \mintinline{Python}{pushtotalk.py} zdefinowana została funkcja \mintinline{Python}{switch} z wrapperem oznaczonym \mintinline{Python}{"com.example.commands.SwitchView"}. Definiujemy więc \mintinline{Python}{"queryPatterns"} czyli jakiego typu hasła powinny wywoływać zmianę widoku, oraz która część tej wypowiedzi jest kluczowa i oznacza który konkretnie widok chcemy przywołać. W tym celu musimy też zdefiniować typ \mintinline{Python}{"ViewType"} gdzie definiujemy słowa klucze oraz ich typowe synonimy, a nawet potencjalne literówki. Dzięki temu użytkownik nie musi wypowiadać ``Change view to dashboard view'', wystarczy że powie ``show dash''. Całość jest dosyć naturalna.
+    Plik konfiguracyjny poleceń niestandardowych. W naszym wypadku poleceniem niestandardowym jest zmiana widoku na inny. W \mintinline{Python}{pushtotalk.py} zdefinowana została funkcja \mintinline{Python}{switch} z wrapperem oznaczonym \mintinline{Python}{"com.example.commands.SwitchView"}. Definiujemy więc \mintinline{Python}{"queryPatterns"} czyli jakiego typu hasła powinny wywoływać zmianę widoku, oraz która część tej wypowiedzi jest kluczowa i oznacza który konkretnie widok chcemy przywołać. W tym celu musimy też zdefiniować typ \mintinline{Python}{"ViewType"} gdzie definiujemy słowa klucze oraz ich typowe synonimy, a nawet potencjalne literówki. Dzięki temu użytkownik nie musi wypowiadać ,,Change view to dashboard view'', wystarczy że powie ,,show dash''. Całość jest dosyć naturalna.
     
 \subsection{Sposób uruchamiania}
     Uruchamianie programu poza platformą na którą został napisany może być problematyczne.
@@ -451,7 +451,7 @@ Ten plik ma prawie 400 lini, skupie się więc tylko na tych w których poczyni�
 \chapter{Wnioski i dalsza praca}
     Praca nad tym projektem to była przede wszystkim świetna zabawa. Udało mi się spełnić moje wielkie marzenie. Uważam, że efekt jest na prawdę dobry i bardzo praktyczny. Jestem pozytywnie zaskoczony jak dobrze zadziałał mikrofon i zamiana słów na tekst. Jest to problem z którym nie radzi sobie wiele współczesnych producentów samochodów wyposażonych w funkcję obsługi głosowej. Przypuszczalnie muszą one bazować na modelach offline co na pewno utrudnia sprawę. Taki projekt na pewno uświadamia jak ogromna jest różnica między konceptem który wykazuje jakąś ciekawą funkcjonalność a projektem zamkniętym od A do Z. Cieszę się jednak, że się na to porwałem. Nie jestem w stu procentach zadowolony z użytego ekranu. Czasami myślę, że należało użyć pierwotnego prototypu LED. Nie zamykam się natomiast na tą możliwość i być może kiedyś przeprowadzę taką zmianę. Wymagałoby to zupełnie innego trybu wyświetlania informacji, ale zachowana byłaby wtedy tajemnica współczesnej technologii. Z pozoru wydawałoby się, że system faktycznie może pochodzić z lat 80-tych. Niestety taki ekran LCD jest wrażliwy na zmianę kąta patrzenia na powierzchnię, co szczególnie widać w ciemności gdy czarne tło rozjaśnia się i przyciemnia podczas ruszania głową. Nie zmienia to faktu że efekt jest wyśmienity i chwilę na pewno będę używał go w ten sposób.
     
-    Na przyszłość można usprawnić aplikację o dodatkowe informacje i widoki (co mam zamiar zrobić). Należałoby też dodać więcej niestandardowych komend głosowych takich jak ``przeczytaj na głos błędy silnika''. Ekran jest dobrym środkiem przekazu informacji, jednak kuszące byłoby rozszerzyć możliwości programu do maksimum - tak żeby osoba niezaznajomiona z projektem odniosła jak najlepsze wrażenie. Chciałbym też wprowadzić więcej stanu modyfikowalnego głosowo. Przykładem może być włączanie i wyłączanie możliwości rozpoczęcia konwersacji za pomocą słowa klucza bądź ustawianie jakiś alarmów (np. ``poinformuj mnie gdy silnik osiągnie 60 stopni''). Natomiast rozbudowywanie systemu w ten sposób to temat otwarty i bardzo szeroki. Spokojnie można poświęcić na to drugie tyle czasu co na całą konstrukcję. O ile myślę, że warto, to uważam że lepiej doimplementowywać kolejne funkcjonalności na bieżąco w trakcie pojawiania się nowych potrzeb. Może okazać się, że funkcjonalność typu ``poinformuj mnie gdy silnik osiągnie 60 stopni'' była tylko pozornie ciekawa i implementacja była tylko stratą czasu i niepotrzebną komplikacją.
+    Na przyszłość można usprawnić aplikację o dodatkowe informacje i widoki (co mam zamiar zrobić). Należałoby też dodać więcej niestandardowych komend głosowych takich jak ,,przeczytaj na głos błędy silnika''. Ekran jest dobrym środkiem przekazu informacji, jednak kuszące byłoby rozszerzyć możliwości programu do maksimum -- tak żeby osoba niezaznajomiona z projektem odniosła jak najlepsze wrażenie. Chciałbym też wprowadzić więcej stanu modyfikowalnego głosowo. Przykładem może być włączanie i wyłączanie możliwości rozpoczęcia konwersacji za pomocą słowa klucza bądź ustawianie jakiś alarmów (np. ,,poinformuj mnie gdy silnik osiągnie 60 stopni''). Natomiast rozbudowywanie systemu w ten sposób to temat otwarty i bardzo szeroki. Spokojnie można poświęcić na to drugie tyle czasu co na całą konstrukcję. O ile myślę, że warto, to uważam że lepiej doimplementowywać kolejne funkcjonalności na bieżąco w trakcie pojawiania się nowych potrzeb. Może okazać się, że funkcjonalność typu ,,poinformuj mnie gdy silnik osiągnie 60 stopni'' była tylko pozornie ciekawa i implementacja była tylko stratą czasu i niepotrzebną komplikacją.
     
     Innym rozwiązaniem jakie można rozważyć w przyszłości jest zapewnienie własnego połączenia z internetem oraz integracja z serwisami typu spotify. Można by podłączyć też moduł GPS dla prowadzenia prostej telemetrii i logowania pozycji. Na ekranie można by rysować różne ciekawe wykresy. Można by też logować w chmurze pozycję co stały odstęp czasu żeby zabezpieczyć się przed kradzieżą. Dobrze byłoby też nawiązywać połączenie z telefonem przez bluetooth. Funkcja której mi zawsze brakował podczas jazdy to uczestniczenie w pisanej rozmowie na czacie używając tylko głosu i odsłuchując wiadomości które normalnie byłbym zmuszony przeczytać. Pomysłów więc na dalszy rozwój tego konkretnego systemu mam całą masę, na pewno więcej niż mam czasu.
     
